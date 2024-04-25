@@ -10,7 +10,8 @@ on:
 jobs:
   build:
     name: Deploy docs
-    runs-on: ubuntu-latest
+    if: github.repository == 'heckelmann/kyverno-keptn-workshop'
+    runs-on: ubuntu-latest    
     steps:
       - name: Checkout main
         uses: actions/checkout@v1
