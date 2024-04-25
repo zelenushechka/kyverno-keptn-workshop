@@ -1,6 +1,6 @@
 site_name: "Kyverno Keptn Workshop"
 theme:
-  name: material
+  name: bootstrap386
   palette: 
       # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
