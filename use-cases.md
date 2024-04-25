@@ -34,7 +34,7 @@ graph TD
 - KinD (Kubernetes in Docker)
 - ArgoCD (Delivery)
 - Chainsaw
-- Kyberno 
+- Kyverno 
 - Keptn
 - Grafana (Dashboarding)
 - Jaeger (Observability)
