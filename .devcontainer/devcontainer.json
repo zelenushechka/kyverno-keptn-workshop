@@ -1,7 +1,7 @@
 {
 	"name": "Kyverno-Keptn-Workshop",
 	//"dockerFile": "Dockerfile",
-	"image": "ghcr.io/heckelmann/kyverno-keptn-workshop:latest",
+	"image": "ghcr.io/heckelmann/heckelmann/kyverno-keptn-workshop:latest",
 
 	// do not change these if you want Docker in Docker support
 	"runArgs": ["--init", "--privileged", "--network=host"],
