@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: 'https://github.com/heckelmann/kyverno-keptn-workshop.git'
     targetRevision: main
-    path: "gitops/infrastructure/keptn-config"
+    path: "gitops/infrastructure/keptn-monitoring"
   destination:
     namespace: keptn-system
     server: 'https://kubernetes.default.svc'
