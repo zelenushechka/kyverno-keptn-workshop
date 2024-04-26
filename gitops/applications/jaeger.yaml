@@ -4,7 +4,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
   name: jaeger
-  namespace: jaeger
+  namespace: argocd
 spec:
   source:
     repoURL: 'https://github.com/heckelmann/kyverno-keptn-workshop.git'
