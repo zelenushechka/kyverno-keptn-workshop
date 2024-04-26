@@ -19,17 +19,6 @@ import (
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 )
 
-/*func initTracer() {
-	exporter, err := stdout.NewExporter(stdout.WithPrettyPrint())
-	if err != nil {
-		panic(err)
-	}
-	tp := sdktrace.NewTracerProvider(
-		sdktrace.WithBatcher(exporter),
-	)
-	otel.SetTracerProvider(tp)
-}*/
-
 var (
 	serviceName  = os.Getenv("SERVICE_NAME")
 	collectorURL = os.Getenv("OTEL_EXPORTER_OTLP_ENDPOINT")
