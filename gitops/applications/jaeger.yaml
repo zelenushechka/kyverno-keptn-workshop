@@ -3,7 +3,7 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
-  name: cert-manager
+  name: jaeger
   namespace: jaeger
 spec:
   source:
