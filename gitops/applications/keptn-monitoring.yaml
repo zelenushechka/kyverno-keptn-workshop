@@ -11,7 +11,7 @@ spec:
     targetRevision: main
     path: "gitops/infrastructure/keptn-monitoring"
   destination:
-    namespace: keptn-system
+    namespace: monitoring
     server: 'https://kubernetes.default.svc'
   project: default
   syncPolicy:
