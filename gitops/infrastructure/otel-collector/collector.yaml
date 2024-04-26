@@ -98,7 +98,7 @@ spec:
     spec:
       containers:
         - command:
-            - "/otelcol"
+            - "/otelcol-contrib"
             - "--config=/conf/otel-collector-config.yaml"
           env:
             - name: GOGC
