@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  name: prometheus-grafana
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # enabling cascading deletion
+spec:
+  project: default
+  source:
+    repoURL: 'https://charts.lifecycle.keptn.sh' # helm chart repository
+    chart: observability-stack # helm chart name
+    targetRevision: 48.1.1 # helm chart version - use latest available here
+    helm:
+      values: |
+        grafana:
+          adminPassword: admin
+          sidecar.datasources.defaultDatasourceEnabled: false
+        prometheus:
+          prometheusSpec:
+            additionalScrapeConfigs:
+              - job_name: "scrape_klt"
+                scrape_interval: 5s
+                static_configs:
+                  - targets: ['lifecycle-operator-metrics-service.keptn-system.svc.cluster.local:2222']
+  destination:
+    server: 'https://kubernetes.default.svc' # server where Keptn will be deployed
+    namespace: keptn-system # namespace where Keptn will be deployed
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
