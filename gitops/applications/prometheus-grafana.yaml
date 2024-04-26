@@ -10,7 +10,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://charts.lifecycle.keptn.sh' # helm chart repository
+    repoURL: 'https://prometheus-community.github.io/helm-charts' # helm chart repository
     chart: observability-stack # helm chart name
     targetRevision: 48.1.1 # helm chart version - use latest available here
     helm:
