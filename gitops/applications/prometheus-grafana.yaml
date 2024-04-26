@@ -27,7 +27,7 @@ spec:
                   - targets: ['lifecycle-operator-metrics-service.keptn-system.svc.cluster.local:2222']
   destination:
     server: 'https://kubernetes.default.svc' # server where Keptn will be deployed
-    namespace: keptn-system # namespace where Keptn will be deployed
+    namespace: monitoring  # namespace where Keptn will be deployed
   syncPolicy:
     automated:
       prune: true
