@@ -4,6 +4,6 @@ metadata:
   name: jaeger
   namespace: keptn-system
 spec:
-  strategy: allInOne
+  strategy: allinone
   ingress: 
     enabled: false   
