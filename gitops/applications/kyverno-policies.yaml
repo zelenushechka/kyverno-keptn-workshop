@@ -2,16 +2,16 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
-  name: otel-collector
+    argocd.argoproj.io/sync-wave: "2"
+  name: kyverno-policies
   namespace: argocd
 spec:
   source:
     repoURL: 'https://github.com/heckelmann/kyverno-keptn-workshop.git'
     targetRevision: main
-    path: "gitops/infrastructure/otel-collector"
+    path: "gitops/infrastructure/kyverno-policies"
   destination:
-    namespace: keptn-lifecycle-toolkit-system
+    namespace: kyverno
     server: 'https://kubernetes.default.svc'
   project: default
   syncPolicy:
