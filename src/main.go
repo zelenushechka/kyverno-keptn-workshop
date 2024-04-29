@@ -9,6 +9,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	flagd "github.com/open-feature/go-sdk-contrib/providers/flagd/pkg"
+	"github.com/open-feature/go-sdk/openfeature"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
@@ -70,6 +72,7 @@ func main() {
 	r.GET("/fast", fastHandler)
 	r.GET("/slow", slowHandler)
 	r.GET("/healthz", healthzHandler)
+	r.GET("/", rootHandler)
 
 	if err := r.Run(":8080"); err != nil {
 		panic(err)
@@ -93,4 +96,24 @@ func slowHandler(c *gin.Context) {
 	time.Sleep(time.Duration(rand.Intn(1000)) * time.Millisecond) // Simulate slow operation
 
 	c.JSON(http.StatusOK, gin.H{"message": "This is a slow response"})
+}
+
+func rootHandler(c *gin.Context) {
+	err := openfeature.SetProviderAndWait(flagd.NewProvider())
+	if err != nil {
+		// If a provider initialization error occurs, log it and exit
+		log.Fatalf("Failed to set the OpenFeature provider: %v", err)
+	}
+	// Create a new client
+	client := openfeature.NewClient("app")
+
+	v2Enabled, _ := client.BooleanValue(
+		context.Background(), "v2_enabled", true, openfeature.EvaluationContext{},
+	)
+
+	if v2Enabled {
+		c.HTML(http.StatusOK, "index.html", nil)
+	} else {
+		c.JSON(http.StatusGatewayTimeout, gin.H{"message": "Something went wrong. Please try again later."})
+	}
 }

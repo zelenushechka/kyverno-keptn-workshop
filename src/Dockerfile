@@ -11,6 +11,8 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o server .
 FROM scratch
 
 COPY --from=builder /app/server /app/server
+COPY index.html /app/index.html
+COPY kcd.png /app/kcd.png
 
 EXPOSE 8080
 
