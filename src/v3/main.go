@@ -68,19 +68,12 @@ func main() {
 
 	// Route handler
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-
-		// Register your feature flag provider
-		openfeature.SetProvider(flagd.NewProvider(
-			flagd.WithHost("localhost"),
-			flagd.FromEnv(),
-		))
-
 		// Create a new client
 		client := openfeature.NewClient("app")
-
 		featureEnabled, _ := client.BooleanValue(
 			context.Background(), "my-new-feature", false, openfeature.EvaluationContext{},
 		)
+
 		// Delay the response between 5 and 10 seconds
 		if featureEnabled {
 			// return error 500 response
@@ -101,6 +94,12 @@ func main() {
 		}
 		json.NewEncoder(w).Encode(envMap)
 	})
+
+	// Initialize the FlagD client
+	openfeature.SetProvider(flagd.NewProvider(
+		flagd.WithHost("localhost"),
+		flagd.FromEnv(),
+	))
 
 	// Start the server
 	fmt.Println("Server listening on port 8080")

@@ -6,7 +6,7 @@ require (
 	github.com/gorilla/mux v1.8.1
 	github.com/open-feature/go-sdk v1.11.0
 	github.com/open-feature/go-sdk-contrib/providers/flagd v0.2.1
-	github.com/prometheus/client_golang v1.19.1
+	github.com/prometheus/client_golang v1.19.0
 )
 
 require (
