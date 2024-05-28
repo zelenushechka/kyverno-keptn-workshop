@@ -13,9 +13,11 @@ spec:
       labels:
         app: flagd
     spec:
+      serviceAccountName: flagd
       containers:
         - name: flagd
           image: ghcr.io/open-feature/flagd:latest
+          args: ["start", "--sources", "[{\"uri\":\"flagd/feature-flags\",\"provider\":\"kubernetes\"}]"]
           ports:
             - containerPort: 8013
           resources:
@@ -25,6 +27,8 @@ spec:
             requests:
               cpu: "0.1"
               memory: "50Mi"
+       
+             
 ---
 apiVersion: v1
 kind: Service
@@ -48,27 +52,30 @@ metadata:
   namespace: flagd
 
 ---
-
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: flagd
 rules:
-  - apiGroups: [""]
-    resources: ["*"]
-    verbs: ["*"]
-
+- apiGroups:
+  - core.openfeature.dev
+  resources:
+  - featureflagsources
+  - featureflags
+  verbs:
+  - get
+  - watch
+  - list
 ---
-
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
-  name: flagd-cluster-admin-role-binding
+  name: flagd
 roleRef:
-  apiGroup: rbac.authorization.k8s.io
+  apiGroup: ""
   kind: ClusterRole
-  name: cluster-admin
+  name: flagd
 subjects:
-  - kind: ServiceAccount
-    name: flagd
-    namespace: flagd
+- kind: ServiceAccount
+  name: flagd
+  namespace: flagd
