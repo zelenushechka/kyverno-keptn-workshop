@@ -10,5 +10,4 @@ spec:
       app: demo-app                                                                                                                                                              │
   endpoints:
   - port: http
-    interval: 5s
-    scrapeTimeout: 4s
+    interval: 30s

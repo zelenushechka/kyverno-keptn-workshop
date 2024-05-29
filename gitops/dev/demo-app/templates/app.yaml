@@ -19,6 +19,9 @@ spec:
         - image: ghcr.io/heckelmann/workshop-registry/demo-app:{{.Values.serviceVersion}}
           name: demo-app
           imagePullPolicy: Always
+          env:
+            - name: FLAGD_HOST
+              value: "flagd.flagd.svc.cluster.local"
           ports:
           - containerPort: 8080
             name: http
