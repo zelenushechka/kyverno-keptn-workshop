@@ -6,7 +6,7 @@ ARG USER_GID=$USER_UID
 
 RUN export DEBIAN_FRONTEND=noninteractive
 
-COPY .devcontainer/docker.sh /tmp/scripts/
+COPY docker.sh /tmp/scripts/
 # update the container
 RUN apt-get update && \
     apt-get upgrade -y && \
@@ -25,6 +25,13 @@ RUN curl -s https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 
 RUN KIND_RELEASE=$(curl --silent "https://api.github.com/repos/kubernetes-sigs/kind/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') \
     && curl -sSL -o /usr/local/bin/kind https://kind.sigs.k8s.io/dl/$KIND_RELEASE/kind-linux-amd64 \
     && chmod +x /usr/local/bin/kind
+
+
+# Install k9s
+RUN curl -sSL -o /tmp/k9s.tar.gz https://github.com/derailed/k9s/releases/download/v0.32.4/k9s_Linux_amd64.tar.gz \
+    && tar -xzf /tmp/k9s.tar.gz -C /tmp \
+    && mv /tmp/k9s /usr/local/bin/k9s \
+    && chmod +x /usr/local/bin/k9s
 
 
 RUN /tmp/scripts/docker.sh
