@@ -4,15 +4,11 @@ kind: ServiceMonitor
 metadata:
   name: demo-app-dev
   namespace: demo-app-dev
-  labels:
-    app: demo-app
-    release: prometheus-grafana
 spec:
   selector:
     matchLabels:
-      app: demo-app                                                                                                                                                               │
+      app: demo-app                                                                                                                                                              │
   endpoints:
-  - port: "http"
+  - port: http
     interval: 5s
-    path: /metrics
     scrapeTimeout: 4s
