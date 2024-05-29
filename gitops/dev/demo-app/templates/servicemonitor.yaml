@@ -7,8 +7,8 @@ metadata:
       app: demo-app
 spec:
     selector:
-        matchLabels:
-          app: demo-app
+      matchLabels:
+      app: demo-app
     endpoints:
-        - port: 8080
-          interval: 30s
+    - port: 8080
+      interval: 5s
