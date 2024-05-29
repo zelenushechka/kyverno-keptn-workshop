@@ -46,7 +46,7 @@ metadata:
     app: demo-app
     app.kubernetes.io/name: demo-app
     app.kubernetes.io/part-of: demo-app    
-    fuckit: yes
+    fuckit: ido
   name: demo-app
   namespace: demo-app-dev
 spec:

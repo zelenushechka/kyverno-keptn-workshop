@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: demo-app
-      fuckit: yes                                                                                                                                                              │
+      fuckit: ido                                                                                                                                                              │
   endpoints:
   - port: http
     interval: 30s
