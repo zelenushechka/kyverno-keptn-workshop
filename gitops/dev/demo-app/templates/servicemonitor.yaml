@@ -11,5 +11,5 @@ spec:
     matchLabels:
       app: demo-app
   endpoints:
-  - port: 8080
+  - port: "8080"
     interval: 5s
