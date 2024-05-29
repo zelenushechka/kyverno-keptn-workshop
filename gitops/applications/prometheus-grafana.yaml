@@ -20,6 +20,10 @@ spec:
           sidecar.datasources.defaultDatasourceEnabled: false
         prometheus:
           prometheusSpec:
+            ruleSelectorNilUsesHelmValues: false
+            serviceMonitorSelectorNilUsesHelmValues: false
+            podMonitorSelectorNilUsesHelmValues: false
+            probeSelectorNilUsesHelmValues: false          
             additionalScrapeConfigs:
               - job_name: "scrape_klt"
                 scrape_interval: 5s
