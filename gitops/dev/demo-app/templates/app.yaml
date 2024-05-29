@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-app
+  namespace: demo-app-dev
+spec:
+  selector:
+    matchLabels:
+      app: demo-app
+  template:
+    metadata:
+      labels:
+        app: demo-app
+        app.kubernetes.io/name: demo-app
+        app.kubernetes.io/part-of: demo-app
+        app.kubernetes.io/version: {{.Values.serviceVersion}}
+    spec:
+      containers:
+        - image: ghcr.io/heckelmann/workshop-registry/demo-app:{{.Values.serviceVersion}}
+          name: demo-app
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 8080
+            name: http
+            protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/part-of: demo-app
+  name: demo-app
+  namespace: demo-app-dev
+spec:
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: demo-app
+  type: ClusterIP
+---
+apiVersion: lifecycle.keptn.sh/v1
+kind: KeptnAppContext
+metadata:
+  name: demo-app
+  namespace: demo-app-dev
+spec:
+  postDeploymentTasks:
+    - post-deployment
+#  promotionTasks:
+#    - promote
+  metadata:
+    commitID: {{.Values.commitID}}
+---
+apiVersion: lifecycle.keptn.sh/v1
+kind: KeptnTaskDefinition
+metadata:
+  name: post-deployment
+  namespace: demo-app-dev
+spec:
+  deno:
+    inline:
+      code: |
+        console.log("deployment completed");
