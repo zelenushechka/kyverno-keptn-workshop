@@ -10,9 +10,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: demo-app
+      app: demo-app                                                                                                                                                               │
+│     app.kubernetes.io/instance: demo-app-dev                                                                                                                                    │
+│     app.kubernetes.io/name: demo-app                                                                                                                                            │
+│     app.kubernetes.io/part-of: demo-app
   endpoints:
-  - port: "8080"
+  - port: "http"
     interval: 5s
     path: /metrics
     scrapeTimeout: 4s
