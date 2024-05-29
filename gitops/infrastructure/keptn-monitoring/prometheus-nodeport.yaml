@@ -4,7 +4,6 @@ metadata:
   name: prometheus-nodeport
   namespace: monitoring
 spec:
-  clusterIP: None
   ports:
   - name: http-web
     port: 9090

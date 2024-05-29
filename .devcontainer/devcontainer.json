@@ -33,8 +33,9 @@
 		"30100": { "label": "ArgoCD HTTP" },
 		"30101": { "label": "Grafana" },
 		"30102": { "label": "Prometheus" },
-		"30103": { "label": "DemoApp" },
-		"30104": { "label": "Jaeger" }
+		"30103": { "label": "DemoApp-Dev" },
+		"30104": { "label": "Jaeger" },
+		"30105": { "label": "DemoApp-Prod" }
 	},
 
 	// Install extensions
