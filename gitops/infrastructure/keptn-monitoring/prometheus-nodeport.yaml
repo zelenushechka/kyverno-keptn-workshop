@@ -4,15 +4,14 @@ metadata:
   name: prometheus-nodeport
   namespace: monitoring
 spec:
-  type: NodePort
+  clusterIP: None
   ports:
-  - name: web
+  - name: http-web
     port: 9090
     protocol: TCP
-    targetPort: web
+    targetPort: http-web
     nodePort: 30102
   selector:
-    app.kubernetes.io/component: prometheus
-    app.kubernetes.io/instance: k8s
     app.kubernetes.io/name: prometheus
-    app.kubernetes.io/part-of: kube-prometheus
+  sessionAffinity: None
+  type: NodePort
