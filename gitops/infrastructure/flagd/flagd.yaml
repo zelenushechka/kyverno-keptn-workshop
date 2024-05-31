@@ -42,7 +42,7 @@ spec:
     - protocol: TCP
       port: 8013
       targetPort: 8013
-
+  type: ClusterIP
 ---
 
 apiVersion: v1
