@@ -12,7 +12,7 @@ spec:
         - resources:
             # OR inside list of kinds
             kinds:
-            - Analysis
+            - Analyses
             operations:
             - UPDATE
             selector:
