@@ -13,4 +13,4 @@ spec:
         variants:
           'on': true
           'off': false
-        defaultVariant: 'off'
+        defaultVariant: 'on'
