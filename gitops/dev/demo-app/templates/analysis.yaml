@@ -1,0 +1,32 @@
+---
+apiVersion: metrics.keptn.sh/v1
+kind: AnalysisDefinition
+metadata:
+  name: demo-app-analysis
+  namespace: demo-app-dev
+spec:
+  objectives:
+  - analysisValueTemplateRef:
+      name: request-duration
+    keyObjective: false
+    target:
+      failure:
+        greaterThan:
+          fixedValue: 500m
+      warning:
+        greaterThan:
+          fixedValue: 300m
+    weight: 1
+  totalScore:
+    passPercentage: 60
+    warningPercentage: 50
+---
+apiVersion: metrics.keptn.sh/v1
+kind: AnalysisValueTemplate
+metadata:
+  name: request-duration
+  namespace: demo-app-dev
+spec:
+  provider:
+    name: prometheus
+  query: "{{ printf "histogram_quantile(0.95, sum by(le) (rate(http_request_duration_seconds_bucket{job='demo-app-dev/demo-app'}[1m])))" }}"    
