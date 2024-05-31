@@ -17,7 +17,7 @@ spec:
       containers:
         - name: flagd
           image: ghcr.io/open-feature/flagd:latest
-          args: ["start", "--sources", "[{\"uri\":\"flagd/feature-flags\",\"provider\":\"kubernetes\"}]"]
+          args: ["start", "-p 8013", "--sources", "[{\"uri\":\"flagd/feature-flags\",\"provider\":\"kubernetes\"}]"]
           ports:
             - containerPort: 8013
           resources:
