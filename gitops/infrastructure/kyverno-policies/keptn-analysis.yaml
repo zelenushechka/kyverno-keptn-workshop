@@ -1,11 +1,11 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: feature-flag-change
+  name: keptn-analysis
 spec:
   validationFailureAction: Audit
   rules:
-    - name: match-feature-flag-change
+    - name: keptn-analysis-success
       match:
         any:
         # AND across kinds and namespaceSelector
