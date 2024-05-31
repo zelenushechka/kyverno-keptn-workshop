@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load-generator
+  namespace: keptn-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: load-generator
+  template:
+    metadata:
+      labels:
+        app: load-generator
+    spec:
+      containers:
+        - name: curlimage
+          image: curlimages/curl
+          command: ["sh", "-c", "while true; do curl http://demo-app.demo-app-dev.svc.cluster.local:8080; sleep 1; done"]
