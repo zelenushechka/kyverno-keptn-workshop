@@ -638,4 +638,5 @@ metadata:
   name: grafana-dashboard-keptn-workloads-dora
   namespace: monitoring
   labels:
-    grafana_dashboard: "true"
+    grafana_dashboard: "1"                                     
+    release: prometheus-grafana
