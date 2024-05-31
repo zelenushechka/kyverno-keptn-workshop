@@ -23,7 +23,7 @@ spec:
         kind: Analysis
         name: service-analysis-kyverno
         # generate the resource in the new namespace
-        namespace: "{{request.object.metadata.name}}"
+        namespace: "demo-app-dev"
         data:
           spec:
             timeframe:
