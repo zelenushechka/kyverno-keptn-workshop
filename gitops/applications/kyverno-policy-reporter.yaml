@@ -10,6 +10,14 @@ spec:
     - repoURL: 'https://kyverno.github.io/policy-reporter'
       targetRevision: 2.23.1
       chart: policy-reporter
+      helm:
+        parameters:
+          - name: "kyvernoPlugin.enabled"
+            value: "true"     
+          - name:  "ui.enabled"
+            value: "true"
+          - name: "ui.plugins.kyverno"
+            value: "true"
   destination:
     namespace: policy-reporter
     server: 'https://kubernetes.default.svc'
