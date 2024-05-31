@@ -1,0 +1,35 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: feature-flag-change
+spec:
+  rules:
+    - name: match-feature-flag-change
+      match:
+        any:
+        # AND across kinds and namespaceSelector
+        - resources:
+            # OR inside list of kinds
+            kinds:
+            - FeatureFlag
+            operations:
+            - CREATE
+            - UPDATE
+            selector:
+              matchLabels:
+                app: sample-app
+                type: feature-flag
+  generate:
+    apiVersion: metrics.keptn.sh/v1alpha3
+    kind: Analysis
+    name: service-analysis-kyverno
+    # generate the resource in the new namespace
+    namespace: "{{request.object.metadata.name}}"
+    data:
+      spec:
+        timeframe:
+          recent: 5m
+        args:
+          "workload": "demo-app-dev"
+        analysisDefinition:
+          name: demo-app-analysis            

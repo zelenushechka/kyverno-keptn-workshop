@@ -5,6 +5,7 @@ metadata:
   namespace: flagd
   labels:
     app: sample-app
+    type: feature-flag
 spec:
   flagSpec:
     flags:
