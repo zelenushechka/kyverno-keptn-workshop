@@ -17,7 +17,7 @@ stringData:
                 "name": "prometheus",
                 "orgId": 1,
                 "type": "prometheus",
-                "url": "http://observability-stack-kube-p-prometheus.monitoring.svc:9090",
+                "url": "http://prometheus-grafana-kube-pr-prometheus.monitoring.svc:9090",
                 "version": 1
             },
             {
