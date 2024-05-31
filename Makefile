@@ -19,6 +19,7 @@ create:
 	@echo "Configure ArgoCD"
 	@kubectl apply -n argocd -f .devcontainer/argocd-no-tls.yaml
 	@kubectl apply -n argocd -f .devcontainer/argocd-nodeport.yaml
+	@kubectl apply -n argocd -f .devcontainer/argocd-configmap.yaml
 	@echo "Restart ArgoCD server..."
 	@kubectl -n argocd rollout restart deploy/argocd-server
 	@kubectl -n argocd rollout status deploy/argocd-server --timeout=300s
