@@ -6,7 +6,7 @@ metadata:
 spec:
   postDeploymentTasks:
     - load-test
-  postDeploymentEvaluation:
+  postDeploymentEvaluations:
     - demoapp-heatlh-check
 #  promotionTasks:
 #    - promote
