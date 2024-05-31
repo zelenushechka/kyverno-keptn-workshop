@@ -30,7 +30,7 @@ metadata:
   namespace: demo-app-dev
 spec:
   provider:
-    name: my-provider
+    name: prometheus
   query: 'avg(rate(http_request_duration_seconds_bucket{job="demo-app-dev/demo-app"}[2m]))'
   fetchIntervalSeconds: 5
 ---
