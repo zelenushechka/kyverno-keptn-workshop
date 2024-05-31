@@ -7,7 +7,7 @@ metadata:
 spec:
   objectives:
   - analysisValueTemplateRef:
-      name: request-duration
+      name: request-duration-95th-percentile
     keyObjective: false
     target:
       failure:
@@ -24,7 +24,7 @@ spec:
 apiVersion: metrics.keptn.sh/v1
 kind: AnalysisValueTemplate
 metadata:
-  name: request-duration
+  name: request-duration-95th-percentile
   namespace: demo-app-dev
 spec:
   provider:
