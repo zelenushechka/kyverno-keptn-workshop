@@ -6,10 +6,13 @@ metadata:
   name: kyverno
   namespace: argocd
 spec:
-  source:
-    repoURL: 'https://kyverno.github.io/kyverno'
-    targetRevision: 3.1.4
-    chart: kyverno
+  sources:
+    - repoURL: 'https://kyverno.github.io/kyverno'
+      targetRevision: 3.1.4
+      chart: kyverno
+    - repoURL: 'https://github.com/heckelmann/kyverno-keptn-workshop.git'
+      targetRevision: main
+      path: "gitops/infrastructure/kyverno-permissions"
   destination:
     namespace: kyverno
     server: 'https://kubernetes.default.svc'
