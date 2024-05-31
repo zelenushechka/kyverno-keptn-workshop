@@ -46,7 +46,7 @@ metadata:
 spec:
   provider:
     name: prometheus
-  query: 'avg(rate(http_request_duration_seconds_bucket{job="demo-app-dev/demo-app"}[2m]))'
+  query: 'avg(rate(http_request_duration_seconds_sum{path="/"}[2m]) / rate(http_request_duration_seconds_count{path="/"}[2m]))'
   fetchIntervalSeconds: 5
 ---
 apiVersion: lifecycle.keptn.sh/v1alpha3
