@@ -1,0 +1,8 @@
+apiVersion: options.keptn.sh/v1alpha1
+kind: KeptnConfig
+metadata:
+  name: keptnconfig
+  namespace: keptn-system
+spec:
+  OTelCollectorUrl: 'jaeger-collector:4317'
+  keptnAppCreationRequestTimeoutSeconds: 30
