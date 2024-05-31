@@ -10,9 +10,11 @@ rules:
 - apiGroups:
   - metrics.keptn.sh
   resources:
-  - analyses
+  - 'analyses'
   verbs:
   - create
   - list
   - get
   - watch
+  - update
+  - delete
