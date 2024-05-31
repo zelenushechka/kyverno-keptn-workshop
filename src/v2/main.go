@@ -66,8 +66,7 @@ func main() {
 
 	// Route handler
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		// Delay the response between 5 and 10 seconds
-		time.Sleep(time.Duration(5+rand.Intn(6)) * time.Second)
+		time.Sleep(time.Duration(2+rand.Intn(6)) * time.Second)
 		w.Write([]byte("Hello World! But Delayed!"))
 	})
 
