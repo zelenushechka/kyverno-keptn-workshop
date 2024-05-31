@@ -8,7 +8,7 @@ metadata:
   name: kyverno:create-keptn-analysis
 rules:
 - apiGroups:
-  - metrics.keptn.sh/v1
+  - metrics.keptn.sh
   resources:
   - analyses
   verbs:
