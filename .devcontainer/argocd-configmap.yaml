@@ -1,14 +1,15 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-cm
+  namespace: argocd
 data:
   resource.compareoptions: |
     # disables status field diffing in specified resource types
     ignoreAggregatedRoles: true
-  resource.customizations: |
-    networking.k8s.io/Ingress:
-      health.lua: |
-        hs = {}
-        hs.status = "Healthy"
-        return hs
   resource.customizations.health.argoproj.io_Application: |
     hs = {}
     hs.status = "Progressing"
@@ -22,10 +23,3 @@ data:
       end
     end
     return hs
-kind: ConfigMap
-metadata:
-  labels:
-    app.kubernetes.io/name: argocd-cm
-    app.kubernetes.io/part-of: argocd
-  name: argocd-cm
-  namespace: argocd
