@@ -13,23 +13,22 @@ spec:
             kinds:
             - FeatureFlag
             operations:
-            - CREATE
             - UPDATE
             selector:
               matchLabels:
                 app: sample-app
                 type: feature-flag
-  generate:
-    apiVersion: metrics.keptn.sh/v1alpha3
-    kind: Analysis
-    name: service-analysis-kyverno
-    # generate the resource in the new namespace
-    namespace: "{{request.object.metadata.name}}"
-    data:
-      spec:
-        timeframe:
-          recent: 5m
-        args:
-          "workload": "demo-app-dev"
-        analysisDefinition:
-          name: demo-app-analysis            
+      generate:
+        apiVersion: metrics.keptn.sh/v1alpha3
+        kind: Analysis
+        name: service-analysis-kyverno
+        # generate the resource in the new namespace
+        namespace: "{{request.object.metadata.name}}"
+        data:
+          spec:
+            timeframe:
+              recent: 5m
+            args:
+              "workload": "demo-app-dev"
+            analysisDefinition:
+              name: demo-app-analysis            
