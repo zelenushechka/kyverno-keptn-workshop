@@ -1,0 +1,25 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: feature-flag-change
+spec:
+  validationFailureAction: Audit
+  rules:
+    - name: match-feature-flag-change
+      match:
+        any:
+        # AND across kinds and namespaceSelector
+        - resources:
+            # OR inside list of kinds
+            kinds:
+            - Analysis
+            operations:
+            - UPDATE
+            selector:
+              matchLabels:
+                generate.kyverno.io/policy-name: feature-flag-change
+      validate:
+        message: "Analysis needs to be passed."
+        pattern:
+          status:
+            pass: "true"
