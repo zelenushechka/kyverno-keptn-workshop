@@ -65,19 +65,11 @@ metadata:
   namespace: demo-app-dev
 spec:
   postDeploymentTasks:
-    - post-deployment
+    - load-test
+  postDeploymentEvaluation:
+    - demoapp-heatlh-check
 #  promotionTasks:
 #    - promote
   metadata:
     commitID: {{.Values.commitID}}
----
-apiVersion: lifecycle.keptn.sh/v1
-kind: KeptnTaskDefinition
-metadata:
-  name: post-deployment
-  namespace: demo-app-dev
-spec:
-  deno:
-    inline:
-      code: |
-        console.log("deployment completed");
+

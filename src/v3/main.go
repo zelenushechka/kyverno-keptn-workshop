@@ -75,10 +75,9 @@ func main() {
 		)
 
 		// Delay the response between 5 and 10 seconds
-		if featureEnabled {
-			// return error 500 response
-			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte("Internal Server Error"))
+		if featureEnabled {			
+			time.Sleep(time.Duration(2+rand.Intn(6)) * time.Second)
+			w.Write([]byte("Hello World! But Delayed!"))
 			return
 		}
 
