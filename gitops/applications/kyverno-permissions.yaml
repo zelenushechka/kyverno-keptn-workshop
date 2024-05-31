@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  name: kyverno-permissions
+  namespace: argocd
+spec:
+  source:
+    repoURL: 'https://github.com/heckelmann/kyverno-keptn-workshop.git'
+    targetRevision: main
+    path: "gitops/infrastructure/kyverno-permissions"
+  destination:
+    namespace: kyverno
+    server: 'https://kubernetes.default.svc'
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        maxDuration: 3m0s
+        factor: 2
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+      - ServerSideApply=true
