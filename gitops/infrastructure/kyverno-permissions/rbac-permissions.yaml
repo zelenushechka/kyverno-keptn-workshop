@@ -9,7 +9,7 @@ metadata:
 rules:
 - apiGroups:
   - metrics.keptn.sh
-  - batch/v1
+  - batch
   resources:
   - 'analyses'
   - 'jobs'
