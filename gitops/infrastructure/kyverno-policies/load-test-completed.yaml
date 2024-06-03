@@ -12,9 +12,7 @@ spec:
             value: 1    
       match:
         all:
-        # AND across kinds and namespaceSelector
         - resources:
-            # OR inside list of kinds
             kinds:
             - Job/status
             operations:
@@ -26,13 +24,12 @@ spec:
         apiVersion: metrics.keptn.sh/v1alpha3
         kind: Analysis
         name: service-analysis-kyverno-{{request.object.metadata.resourceVersion}}
-        # generate the resource in the new namespace
-        namespace: "demo-app-dev"
+        namespace: "demo-app-prod"
         data:
           spec:
             timeframe:
               recent: 1m
             args:
-              "workload": "demo-app-dev"
+              "workload": "demo-app-prod"
             analysisDefinition:
               name: demo-app-analysis            

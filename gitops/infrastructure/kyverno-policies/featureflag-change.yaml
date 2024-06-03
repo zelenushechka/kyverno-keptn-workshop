@@ -7,9 +7,7 @@ spec:
     - name: match-feature-flag-change
       match:
         any:
-        # AND across kinds and namespaceSelector
         - resources:
-            # OR inside list of kinds
             kinds:
             - FeatureFlag
             operations:
@@ -22,15 +20,13 @@ spec:
         apiVersion: batch/v1
         kind: Job
         name: demo-app-load-test-{{request.object.metadata.resourceVersion}}
-        # generate the resource in the new namespace
-        namespace: "demo-app-dev"
+        namespace: "demo-app-prod"
         data:
           spec:
             template:
               metadata:
                 labels:
-                  app.kubernetes.io/instance: demo-app-dev
-                  trigger-keptn-analysis: "true"
+                  app.kubernetes.io/instance: demo-app-prod
               spec:
                 containers:
                 - command:
