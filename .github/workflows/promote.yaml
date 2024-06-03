@@ -1,0 +1,40 @@
+name: promote
+on:
+  workflow_dispatch:
+    inputs:
+      traceParent:
+        description: 'OTEL parent trace'
+        required: false
+        type: string
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          # configure git client
+          git config --global user.email "<email address>"
+          git config --global user.name "<name>"
+          # create a new branch
+          git switch -c production/${{ github.sha }}
+          # promote the change
+          cp gitops/dev/demo-app/values.yaml gitops/prod/demo-app/values.yaml
+          echo "traceParent: $TRACE_PARENT" >> gitops/prod/demo-app/values.yaml
+
+          # push the change to the new branch
+          git add gitops/prod/demo-app/values.yaml
+          git commit -m "Promote dev to production"
+          git push -u origin production/${{ github.sha }}
+        env:
+          TRACE_PARENT: ${{ inputs.traceParent }}
+      - run: |
+          gh pr create \
+            -B main \
+            -H production/${{ github.sha }} \
+            --title "Promote dev to production" \
+            --body "Automatically created by GHA"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
