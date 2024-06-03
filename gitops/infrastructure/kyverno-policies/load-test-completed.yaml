@@ -1,10 +1,10 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: feature-flag-change
+  name: load-test-completed
 spec:
   rules:
-    - name: match-feature-flag-change
+    - name: load-test-completed
       match:
         any:
         # AND across kinds and namespaceSelector
