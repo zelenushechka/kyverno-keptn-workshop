@@ -7,7 +7,7 @@ metadata:
 spec:
   objectives:
   - analysisValueTemplateRef:
-      name: request-duration-95th-percentile
+      name: request-duration
     keyObjective: false
     target:
       failure:
@@ -24,9 +24,9 @@ spec:
 apiVersion: metrics.keptn.sh/v1
 kind: AnalysisValueTemplate
 metadata:
-  name: request-duration-95th-percentile
+  name: request-duration
   namespace: demo-app-dev
 spec:
   provider:
     name: prometheus
-  query: "sum by (path) (rate(http_request_duration_seconds_sum{path="/"}[2m]) / rate(http_request_duration_seconds_count{path="/"}[2m]))"    
+  query: "{{ printf sum by (path) (rate(http_request_duration_seconds_sum{path="/"}[2m]) / rate(http_request_duration_seconds_count{path="/"}[2m]))}}"    
