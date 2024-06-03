@@ -31,7 +31,7 @@ spec:
         data:
           spec:
             timeframe:
-              recent: 5m
+              recent: 1m
             args:
               "workload": "demo-app-dev"
             analysisDefinition:
