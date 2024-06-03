@@ -1,0 +1,62 @@
+apiVersion: lifecycle.keptn.sh/v1
+kind: KeptnAppContext
+metadata:
+  name: demo-app
+  namespace: demo-app-prod
+spec:
+  postDeploymentTasks:
+    - load-test
+  postDeploymentEvaluations:
+    - demoapp-heatlh-check
+#  promotionTasks:
+#    - promote
+  metadata:
+    commitID: {{.Values.commitID}}
+---
+apiVersion: lifecycle.keptn.sh/v1alpha3
+kind: KeptnTaskDefinition
+metadata:
+  name: load-test
+  namespace: demo-app-prod
+spec:
+  retries: 0
+  timeout: "5m"
+  container:
+    name: testy-test
+    image: grafana/k6:0.45.0
+    command:
+      - 'k6'
+      - 'run'
+      - 'https://raw.githubusercontent.com/heckelmann/kyverno-keptn-workshop/main/functions/load.js'
+---
+apiVersion: metrics.keptn.sh/v1alpha3
+kind: KeptnMetricsProvider
+metadata:
+  name: prometheus
+  namespace: demo-app-prod
+spec:
+  type: prometheus
+  targetServer: "http://prometheus-operated.monitoring.svc.cluster.local:9090"
+---
+apiVersion: metrics.keptn.sh/v1alpha3
+kind: KeptnMetric
+metadata:
+  name: demoapp-latency
+  namespace: demo-app-prod
+spec:
+  provider:
+    name: prometheus
+  query: 'sum by (path) (rate(http_request_duration_seconds_sum{path="/"}[2m]) / rate(http_request_duration_seconds_count{path="/"}[2m]))'
+  fetchIntervalSeconds: 5
+---
+apiVersion: lifecycle.keptn.sh/v1alpha3
+kind: KeptnEvaluationDefinition
+metadata:
+  name: demoapp-heatlh-check
+  namespace: demo-app-prod
+spec:
+  objectives:
+    - keptnMetricRef:
+        name: demoapp-latency
+        namespace: demo-app-prod
+      evaluationTarget: "<1" #less than 1s
