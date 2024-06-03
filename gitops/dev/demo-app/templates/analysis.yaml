@@ -12,10 +12,10 @@ spec:
     target:
       failure:
         greaterThan:
-          fixedValue: 500m
+          fixedValue: 3
       warning:
         greaterThan:
-          fixedValue: 300m
+          fixedValue: 2
     weight: 1
   totalScore:
     passPercentage: 60
@@ -29,4 +29,4 @@ metadata:
 spec:
   provider:
     name: prometheus
-  query: "{{ printf "histogram_quantile(0.95, sum by(le) (rate(http_request_duration_seconds_bucket{job='demo-app-dev/demo-app'}[1m])))" }}"    
+  query: "sum by (path) (rate(http_request_duration_seconds_sum{path="/"}[2m]) / rate(http_request_duration_seconds_count{path="/"}[2m]))"    
