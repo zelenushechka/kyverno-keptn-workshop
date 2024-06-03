@@ -17,7 +17,7 @@ spec:
             - UPDATE
             selector:
               matchLabels:
-                generate.kyverno.io/policy-name: feature-flag-change
+                generate.kyverno.io/policy-name: load-test-completed
       validate:
         message: "Analysis needs to be passed."
         pattern:
