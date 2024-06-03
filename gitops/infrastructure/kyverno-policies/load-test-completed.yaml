@@ -25,7 +25,7 @@ spec:
       generate:
         apiVersion: metrics.keptn.sh/v1alpha3
         kind: Analysis
-        name: service-analysis-kyverno
+        name: service-analysis-kyverno-{{request.object.metadata.resourceVersion}}
         # generate the resource in the new namespace
         namespace: "demo-app-dev"
         data:

@@ -21,7 +21,7 @@ spec:
       generate:
         apiVersion: batch/v1
         kind: Job
-        name: demo-app-load-test
+        name: demo-app-load-test-{{request.object.metadata.resourceVersion}}
         # generate the resource in the new namespace
         namespace: "demo-app-dev"
         data:
