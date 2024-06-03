@@ -18,8 +18,8 @@ spec:
           fixedValue: 2
     weight: 1
   totalScore:
-    passPercentage: 60
-    warningPercentage: 50
+    passPercentage: 90
+    warningPercentage: 75
 ---
 apiVersion: metrics.keptn.sh/v1
 kind: AnalysisValueTemplate
