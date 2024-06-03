@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 	"time"
+	"math/rand"
 
 	"github.com/gorilla/mux"
 	flagd "github.com/open-feature/go-sdk-contrib/providers/flagd/pkg"
