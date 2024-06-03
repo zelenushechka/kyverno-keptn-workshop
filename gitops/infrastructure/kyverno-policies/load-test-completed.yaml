@@ -16,7 +16,7 @@ spec:
             - UPDATE
             selector:
               matchLabels:
-                trigger-keptn-analysis: "true"
+                generate.kyverno.io/rule-name: match-feature-flag-change
       generate:
         apiVersion: metrics.keptn.sh/v1alpha3
         kind: Analysis
