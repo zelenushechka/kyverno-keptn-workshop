@@ -46,7 +46,7 @@ metadata:
 spec:
   provider:
     name: prometheus
-  query: 'sum by (path) (rate(http_request_duration_seconds_sum{path="/"}[2m]) / rate(http_request_duration_seconds_count{path="/"}[2m]))'
+  query: 'sum by (path) (rate(http_request_duration_seconds_sum{namespace='demo-app-prod', path="/"}[2m]) / rate(http_request_duration_seconds_count{namespace='demo-app-prod', path="/"}[2m]))'
   fetchIntervalSeconds: 5
 ---
 apiVersion: lifecycle.keptn.sh/v1alpha3
