@@ -6,7 +6,7 @@ spec:
   rules:
     - name: load-test-completed
       match:
-        any:
+        all:
         # AND across kinds and namespaceSelector
         - resources:
             # OR inside list of kinds
@@ -14,6 +14,11 @@ spec:
             - Job/status
             operations:
             - UPDATE
+            preconditions:
+              any:
+                - key: "{{ request.object.status.succeeded || `[]` }}"
+                  operator: Equals
+                  value: 1           
             selector:
               matchLabels:
                 generate.kyverno.io/rule-name: match-feature-flag-change
