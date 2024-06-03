@@ -1,7 +1,7 @@
 apiVersion: metrics.keptn.sh/v1alpha3
 kind: Analysis
 metadata:
-  name: service-analysis
+  name: service-analysis-test
   namespace: demo-app-dev
 spec:
   timeframe:
