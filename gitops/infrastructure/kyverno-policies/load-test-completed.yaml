@@ -11,7 +11,7 @@ spec:
         - resources:
             # OR inside list of kinds
             kinds:
-            - Job/status/succeeded
+            - Job/status
             operations:
             - UPDATE
             selector:
