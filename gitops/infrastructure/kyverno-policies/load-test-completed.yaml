@@ -5,6 +5,11 @@ metadata:
 spec:
   rules:
     - name: load-test-completed
+      preconditions:
+        any:
+          - key: "{{ request.object.status.succeeded || `[]` }}"
+            operator: Equals
+            value: 1    
       match:
         all:
         # AND across kinds and namespaceSelector
@@ -13,12 +18,7 @@ spec:
             kinds:
             - Job/status
             operations:
-            - UPDATE
-            preconditions:
-              any:
-                - key: "{{ request.object.status.succeeded || `[]` }}"
-                  operator: Equals
-                  value: 1           
+            - UPDATE           
             selector:
               matchLabels:
                 generate.kyverno.io/rule-name: match-feature-flag-change
