@@ -22,7 +22,7 @@ jobs:
           git switch -c production/${{ github.sha }}
           # promote the change
           cp gitops/dev/demo-app/values.yaml gitops/prod/demo-app/values.yaml
-          echo "\ntraceParent: $TRACE_PARENT" >> gitops/prod/demo-app/values.yaml
+          echo "traceParent: $TRACE_PARENT" >> gitops/prod/demo-app/values.yaml
 
           # push the change to the new branch
           git add gitops/prod/demo-app/values.yaml
