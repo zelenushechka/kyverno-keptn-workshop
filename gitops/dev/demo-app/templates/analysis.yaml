@@ -29,4 +29,4 @@ metadata:
 spec:
   provider:
     name: prometheus
-  query: "{{ printf "sum by (path) (rate(http_request_duration_seconds_sum{path="/"}[2m]) / rate(http_request_duration_seconds_count{path="/"}[2m]))" }}"    
+  query: "{{ printf "sum by (path) (rate(http_request_duration_seconds_sum{path='/'}[2m]) / rate(http_request_duration_seconds_count{path='/'}[2m]))" }}"    
