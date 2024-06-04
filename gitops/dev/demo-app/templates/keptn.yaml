@@ -61,7 +61,6 @@ spec:
         namespace: demo-app-dev
       evaluationTarget: "<1" #less than 1s
 ---
----
 apiVersion: lifecycle.keptn.sh/v1
 kind: KeptnTaskDefinition
 metadata:
@@ -78,4 +77,4 @@ spec:
         secretKeyRef:
           key: SECURE_DATA
           name: github-token
-    image: docker.io/bacherfl/check-prometheus-target-7bdba90d6553e656a9cbbf7338b9bbe9@sha256:2c3fafa6f600f672a16784e43235145b2ec2caf0821e4106898874e854728685
+    image: ghcr.io/heckelmann/workshop-registry/promote:latest
