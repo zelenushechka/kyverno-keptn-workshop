@@ -40,6 +40,7 @@ RUN KIND_RELEASE=$(curl --silent "https://api.github.com/repos/kubernetes-sigs/k
     && curl -sSL -o /usr/local/bin/kind https://kind.sigs.k8s.io/dl/$KIND_RELEASE/kind-linux-amd64 \
     && chmod +x /usr/local/bin/kind
 
+    [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64
 
 # Install k9s
 RUN curl -sSL -o /tmp/k9s.tar.gz https://github.com/derailed/k9s/releases/download/v0.32.4/k9s_Linux_amd64.tar.gz \
