@@ -1,11 +1,16 @@
 {
 	"name": "Kyverno-Keptn-Workshop",
 	//"dockerFile": "Dockerfile",
-	"image": "ghcr.io/heckelmann/heckelmann/kyverno-keptn-workshop:latest",
+	//"image": "ghcr.io/heckelmann/heckelmann/kyverno-keptn-workshop:latest",
 
 	// do not change these if you want Docker in Docker support
-	"runArgs": ["--init", "--privileged", "--network=host"],
-	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
+	//"runArgs": ["--init", "--privileged", "--network=host"],
+	//"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
+	//"overrideCommand": false,
+
+	"dockerFile": "Dockerfile",
+	"runArgs": ["--init", "--privileged"],
+	"mounts": ["source=dind-var-lib-docker,target=/var/lib/docker,type=volume"],
 	"overrideCommand": false,
 
 	// some base images require a specific user name
@@ -17,19 +22,16 @@
 
 	// forward ports for the app
 	"forwardPorts": [
-		80,
-		443,
 		30100,
 		30101,
 		30102,
 		30103,
-		30104
+		30104,
+		30105
 	],
 
 	// add labels
 	"portsAttributes": {
-		"80": { "label": "NginX Ingress HTTP" },
-		"443": { "label": "NginX Ingress HTTPS" },
 		"30100": { "label": "ArgoCD HTTP" },
 		"30101": { "label": "Grafana" },
 		"30102": { "label": "Prometheus" },
@@ -51,8 +53,7 @@
 				"davidanson.vscode-markdownlint",
 				"gruntfuggly.todo-tree",
 				"mutantdino.resourcemonitor",
-				"humao.rest-client",
-				"ms-vscode.makefile-tools"
+				"humao.rest-client"
 			]
 		}
 	},
