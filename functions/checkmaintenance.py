@@ -1,6 +1,6 @@
 import requests
 
-url = "https://web.de/main"
+url = "https://raw.githubusercontent.com/heckelmann/kyverno-keptn-workshop/main/functions/maintenance.json"
 expected_json = {"maintenance": False}
 
 response = requests.get(url)
