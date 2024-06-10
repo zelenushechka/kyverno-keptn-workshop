@@ -13,7 +13,7 @@ spec:
         app: demo-app
         app.kubernetes.io/name: demo-app
         app.kubernetes.io/part-of: demo-app
-        app.kubernetes.io/version: {{.Values.serviceVersion}}
+        app.kubernetes.io/version: {{ .Values.serviceVersion }}-{{ randAlphaNum 16 }}
     spec:
       containers:
         - image: ghcr.io/heckelmann/workshop-registry/demo-app:{{.Values.serviceVersion}}
