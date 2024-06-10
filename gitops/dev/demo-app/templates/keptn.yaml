@@ -4,6 +4,8 @@ metadata:
   name: demo-app
   namespace: demo-app-dev
 spec:
+  preDeploymentTask:
+    - maintenance-window-check
   postDeploymentTasks:
     - load-test
   postDeploymentEvaluations:
@@ -28,6 +30,18 @@ spec:
       - 'k6'
       - 'run'
       - 'https://raw.githubusercontent.com/heckelmann/kyverno-keptn-workshop/main/functions/load.js'
+
+---
+apiVersion: lifecycle.keptn.sh/v1alpha3
+kind: KeptnTaskDefinition
+metadata:
+  name: maintenance-window-check
+  namespace: demo-app-dev
+spec:
+  retries: 3
+  timeout: "5m"
+  python:
+    httpRef: 'https://raw.githubusercontent.com/heckelmann/kyverno-keptn-workshop/main/functions/checkmaintenance.py'
 ---
 apiVersion: metrics.keptn.sh/v1alpha3
 kind: KeptnMetricsProvider
