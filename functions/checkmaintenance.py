@@ -1,7 +1,7 @@
 import requests
 
 url = "https://raw.githubusercontent.com/heckelmann/kyverno-keptn-workshop/main/functions/maintenance.json"
-expected_json = {"maintenance": False}
+expected_json = {'Maintenance': False}
 
 response = requests.get(url)
 if response.status_code == 200:
