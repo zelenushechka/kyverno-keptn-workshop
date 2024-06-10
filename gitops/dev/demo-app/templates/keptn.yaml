@@ -4,8 +4,8 @@ metadata:
   name: demo-app
   namespace: demo-app-dev
 spec:
-  #preDeploymentTasks:
-    #- maintenance-window-check
+  preDeploymentTasks:
+    - maintenance-window-check
   postDeploymentTasks:
     - load-test
   postDeploymentEvaluations:
