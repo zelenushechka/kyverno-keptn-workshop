@@ -7,7 +7,7 @@ metadata:
 spec:
   validationFailureAction: Audit
   rules:
-    - name: keptn-analysis-success
+    - name: keptn-analysis-failed
       match:
         any:
         # AND across kinds and namespaceSelector
@@ -20,8 +20,32 @@ spec:
             selector:
               matchLabels:
                 generate.kyverno.io/policy-name: load-test-completed
-      validate:
-        message: "Analysis needs to be passed."
-        pattern:
-          status:
-            pass: "true"
+      preconditions:
+        any:
+          - key: "{{ request.object.status.succeeded || `[]` }}"
+            operator: Equals
+            value: 1  
+      generate:
+        apiVersion: batch/v1
+        kind: Job
+        name: rollback-flagd-{{request.object.metadata.resourceVersion}}
+        namespace: "argocd"
+        data:
+          spec:
+            ttlSecondsAfterFinished: 100
+            template:    
+              spec:
+                containers:
+                  - name: argo-container
+                    image: ghcr.io/heckelmann/workshop-registry/argocd-cli:latest
+                    command: ["/rollback.sh", "flagd"]
+                    imagePullPolicy: Always
+                    volumeMounts:
+                      - name: secret-volume
+                        mountPath: /etc/argosecret
+                restartPolicy: Never
+                volumes:
+                  - name: secret-volume
+                    secret:
+                      secretName: argocd-initial-admin-secret
+            backoffLimit: 0
