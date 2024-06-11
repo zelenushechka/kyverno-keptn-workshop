@@ -22,9 +22,9 @@ spec:
                 generate.kyverno.io/policy-name: load-test-completed
       preconditions:
         any:
-          - key: "{{ request.object.status.succeeded || `[]` }}"
+          - key: "{{ request.object.status.state || `[]` }}"
             operator: Equals
-            value: 1  
+            value: "Completed"
       generate:
         apiVersion: batch/v1
         kind: Job
