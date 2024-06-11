@@ -2,11 +2,11 @@ apiVersion: metrics.keptn.sh/v1alpha3
 kind: Analysis
 metadata:
   name: service-analysis-test
-  namespace: demo-app-dev
+  namespace: demo-app-prod
 spec:
   timeframe:
     recent: 1m
   args:
-    "workload": "demo-app-dev"
+    "workload": "demo-app-prod"
   analysisDefinition:
     name: demo-app-analysis

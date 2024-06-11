@@ -14,17 +14,15 @@ spec:
         - resources:
             # OR inside list of kinds
             kinds:
-            - Analysis
+            - Analysis/status
             operations:
             - UPDATE
       preconditions:
         all:
-          - key: "{{ request.object.status.state }}"
+          - key: "{{ request.object.status.state || '' }}"
             operator: Equals
             value: "Completed"
-          - key: "{{ request.object.status.pass || false }}"
-            operator: NotEquals
-            value: true
+
       generate:
         apiVersion: batch/v1
         kind: Job
