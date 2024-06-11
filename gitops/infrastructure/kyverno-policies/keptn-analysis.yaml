@@ -22,9 +22,9 @@ spec:
           - key: "{{ request.object.status.state || `[]` }}"
             operator: Equals
             value: "Completed"
-          - key: "{{ request.object.status.pass || false }}"
+          - key: "{{ request.object.status.pass || `false` }}"
             operator: NotEquals
-            value: true
+            value: "true"
       generate:
         apiVersion: batch/v1
         kind: Job
