@@ -17,14 +17,14 @@ spec:
             - Analysis
             operations:
             - UPDATE
-            selector:
-              matchLabels:
-                generate.kyverno.io/policy-name: load-test-completed
       preconditions:
-        any:
-          - key: "{{ request.object.status.state || `[]` }}"
+        all:
+          - key: "{{ request.object.status.state }}"
             operator: Equals
             value: "Completed"
+          - key: "{{ request.object.status.pass || '' }}"
+            operator: NotEquals
+            value: "true"
       generate:
         apiVersion: batch/v1
         kind: Job
