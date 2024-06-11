@@ -29,7 +29,7 @@ spec:
     command:
       - 'k6'
       - 'run'
-      - 'https://raw.githubusercontent.com/heckelmann/kyverno-keptn-workshop/main/functions/load.js'
+      - 'https://raw.githubusercontent.com/heckelmann/kyverno-keptn-workshop/main/functions/load-dev.js'
 
 ---
 apiVersion: lifecycle.keptn.sh/v1alpha3

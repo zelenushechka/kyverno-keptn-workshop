@@ -14,6 +14,9 @@ spec:
         app: load-generator
     spec:
       containers:
-        - name: curlimage
+        - name: load-dev
           image: curlimages/curl
           command: ["sh", "-c", "while true; do curl http://demo-app.demo-app-dev.svc.cluster.local:8080; sleep 1; done"]
+        - name: load-prod
+          image: curlimages/curl
+          command: ["sh", "-c", "while true; do curl http://demo-app.demo-app-prod.svc.cluster.local:8080; sleep 1; done"]          
