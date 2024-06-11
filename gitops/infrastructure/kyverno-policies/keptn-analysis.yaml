@@ -19,7 +19,7 @@ spec:
             - UPDATE
       preconditions:
         all:
-          - key: "{{ request.object.status.state || '' }}"
+          - key: "{{ request.object.status.state || `[]` }}"
             operator: Equals
             value: "Completed"
 
