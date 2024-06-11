@@ -32,7 +32,7 @@ spec:
         namespace: "argocd"
         data:
           spec:
-            ttlSecondsAfterFinished: 100
+            ttlSecondsAfterFinished: 1000
             template:    
               spec:
                 containers:
