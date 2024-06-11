@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: argocd-rollback
+spec:
+  ttlSecondsAfterFinished: 100
+  template:    
+    spec:
+      containers:
+        - name: argo-container
+          image: ghcr.io/heckelmann/workshop-registry/argocd-cli:latest
+          command: ["/rollback.sh", "flagd"]
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /etc/argosecret
+      restartPolicy: Never
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: argocd-initial-admin-secret
+  backoffLimit: 0

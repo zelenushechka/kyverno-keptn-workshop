@@ -2,6 +2,8 @@ apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
   name: keptn-analysis
+  annotations:
+    argocd.argoproj.io/sync-options: Force=true,Replace=true  
 spec:
   validationFailureAction: Audit
   rules:

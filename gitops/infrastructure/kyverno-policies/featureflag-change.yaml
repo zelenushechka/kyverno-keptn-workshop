@@ -2,6 +2,8 @@ apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
   name: feature-flag-change
+  annotations:
+    argocd.argoproj.io/sync-options: Force=true,Replace=true
 spec:
   rules:
     - name: match-feature-flag-change
