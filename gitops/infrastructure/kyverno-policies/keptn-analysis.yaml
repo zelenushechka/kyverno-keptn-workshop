@@ -24,7 +24,7 @@ spec:
             value: "Completed"
           - key: "{{ request.object.status.pass || '' }}"
             operator: NotEquals
-            value: "true"
+            value: true
       generate:
         apiVersion: batch/v1
         kind: Job
