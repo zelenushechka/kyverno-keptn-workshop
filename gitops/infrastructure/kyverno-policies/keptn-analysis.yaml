@@ -22,7 +22,7 @@ spec:
           - key: "{{ request.object.status.state }}"
             operator: Equals
             value: "Completed"
-          - key: "{{ request.object.status.pass || '' }}"
+          - key: "{{ request.object.status.pass || false }}"
             operator: NotEquals
             value: true
       generate:
