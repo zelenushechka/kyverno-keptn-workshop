@@ -5,13 +5,13 @@ metadata:
   namespace: demo-app-dev
 spec:
   preDeploymentTasks:
-    - maintenance-window-check
+    # - maintenance-window-check
   postDeploymentTasks:
-    - load-test
+    # - load-test
   postDeploymentEvaluations:
-    - demoapp-heatlh-check
+    # - demoapp-heatlh-check
   promotionTasks:
-    - promote
+    # - promote
   metadata:
     commitID: {{.Values.commitID}}
 ---
@@ -44,6 +44,24 @@ spec:
     httpRef: 
       url: 'https://raw.githubusercontent.com/heckelmann/kyverno-keptn-workshop/main/functions/checkmaintenance.py'
 ---
+apiVersion: lifecycle.keptn.sh/v1
+kind: KeptnTaskDefinition
+metadata:
+  name: promote
+  namespace: demo-app-dev
+spec:
+  container:
+    name: promote
+    env:
+    - name: ACTION
+      value: promote
+    - name: SECURE_DATA
+      valueFrom:
+        secretKeyRef:
+          key: SECURE_DATA
+          name: github-token
+    image: ghcr.io/heckelmann/workshop-registry/promote:latest
+---
 apiVersion: metrics.keptn.sh/v1alpha3
 kind: KeptnMetricsProvider
 metadata:
@@ -75,21 +93,3 @@ spec:
         name: demoapp-latency
         namespace: demo-app-dev
       evaluationTarget: "<1" #less than 1s
----
-apiVersion: lifecycle.keptn.sh/v1
-kind: KeptnTaskDefinition
-metadata:
-  name: promote
-  namespace: demo-app-dev
-spec:
-  container:
-    name: promote
-    env:
-    - name: ACTION
-      value: promote
-    - name: SECURE_DATA
-      valueFrom:
-        secretKeyRef:
-          key: SECURE_DATA
-          name: github-token
-    image: ghcr.io/heckelmann/workshop-registry/promote:latest
