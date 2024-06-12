@@ -74,13 +74,51 @@ keptn.sh/post-deployment-tasks: <task-name>
 
 A [KeptnEvaluationDefinition](https://keptn.sh/stable/docs/reference/crd-reference/evaluationdefinition/) assigns target values to KeptnMetric queries. These are used as part of evaluation tasks that Keptn runs as part of pre- and post-analysis phases of a KeptnApp or workload.
 
+```yaml
+apiVersion: lifecycle.keptn.sh/v1alpha3
+kind: KeptnEvaluationDefinition
+metadata:
+  name: demoapp-heatlh-check
+  namespace: demo-app-dev
+spec:
+  objectives:
+    - keptnMetricRef:
+        name: demoapp-latency
+        namespace: demo-app-dev
+      evaluationTarget: "<1" # less than 1 second
+```
+
 ## KeptnMetric
 
 A [KeptnMetricsProvider](https://keptn.sh/stable/docs/reference/crd-reference/metricsprovider/) resource defines an instance of a data provider (such as Prometheus, Thanos, Cortex, Dynatrace, or Datadog) that is used by one or more KeptnMetric resources.
 
+```yaml
+apiVersion: metrics.keptn.sh/v1alpha3
+kind: KeptnMetric
+metadata:
+  name: demoapp-latency
+  namespace: demo-app-dev
+spec:
+  provider:
+    name: prometheus
+  query: 'sum by (path) (rate(http_request_duration_seconds_sum{namespace="demo-app-dev", path="/"}[2m]) / rate(http_request_duration_seconds_count{namespace="demo-app-dev", path="/"}[2m]))'
+  fetchIntervalSeconds: 5
+```
+
 ## KeptnMetricsProvider
 
 A [KeptnMetric](https://keptn.sh/stable/docs/reference/crd-reference/metric/) represents a metric that is collected from a provider. Providing the metrics as a custom resource facilitates the reusability of this data across multiple components and allows using multiple observability platforms for different metrics at the same time.
+
+```yaml
+apiVersion: metrics.keptn.sh/v1alpha3
+kind: KeptnMetricsProvider
+metadata:
+  name: prometheus
+  namespace: demo-app-dev
+spec:
+  type: prometheus
+  targetServer: "http://prometheus-operated.monitoring.svc.cluster.local:9090"
+```
 
 ## AnalysisDefinition
 
@@ -89,3 +127,39 @@ An [AnalysisDefinition](https://keptn.sh/stable/docs/reference/crd-reference/ana
 ## AnalysisValueTemplate
 
 An [AnalysisValueTemplate](https://keptn.sh/stable/docs/reference/crd-reference/analysisvaluetemplate/) resource defines a Service Level Indicator (SLI), which identifies the data to be analyzed by a data source to use and the query to issue. One Analysis can use data from multiple AnalysisValueTemplates.
+
+```yaml
+---
+apiVersion: metrics.keptn.sh/v1
+kind: AnalysisDefinition
+metadata:
+  name: demo-app-analysis
+  namespace: demo-app-prod
+spec:
+  objectives:
+  - analysisValueTemplateRef:
+      name: request-duration
+    keyObjective: false
+    target:
+      failure:
+        greaterThan:
+          fixedValue: 3
+      warning:
+        greaterThan:
+          fixedValue: 2
+    weight: 1
+    keyObjective: true
+  totalScore:
+    passPercentage: 90
+    warningPercentage: 75
+---
+apiVersion: metrics.keptn.sh/v1
+kind: AnalysisValueTemplate
+metadata:
+  name: request-duration
+  namespace: demo-app-prod
+spec:
+  provider:
+    name: prometheus
+  query: "{{ printf "sum by (path) (rate(http_request_duration_seconds_sum{namespace='demo-app-prod', path='/'}[1m]) / rate(http_request_duration_seconds_count{path='/'}[1m]))" }}"    
+```

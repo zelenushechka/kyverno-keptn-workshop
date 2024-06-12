@@ -17,6 +17,7 @@ spec:
         greaterThan:
           fixedValue: 2
     weight: 1
+    keyObjective: true
   totalScore:
     passPercentage: 90
     warningPercentage: 75
