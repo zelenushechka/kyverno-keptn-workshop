@@ -17,3 +17,8 @@ RUN curl -sSL -o /tmp/k9s.tar.gz https://github.com/derailed/k9s/releases/downlo
     && tar -xzf /tmp/k9s.tar.gz -C /tmp \
     && mv /tmp/k9s /usr/local/bin/k9s \
     && chmod +x /usr/local/bin/k9s
+
+
+# Install ArgoCD CLI
+RUN curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 && \
+    chmod +x /usr/local/bin/argocd
