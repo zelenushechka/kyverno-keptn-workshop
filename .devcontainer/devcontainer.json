@@ -36,7 +36,7 @@
 
 	// add labels
 	"portsAttributes": {
-		"30100": { "label": "ArgoCD HTTP", "protocol": "https" },
+		"30100": { "label": "ArgoCD", "protocol": "https" },
 		"30101": { "label": "Grafana" },
 		"30102": { "label": "Prometheus" },
 		"30103": { "label": "DemoApp-Dev" },
