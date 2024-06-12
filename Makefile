@@ -17,7 +17,6 @@ create:
 	@echo "Wait for ArgoCD to be ready..."
 	@kubectl wait --for=condition=available deployment/argocd-server -n argocd --timeout=300s
 	@echo "Configure ArgoCD"
-	@kubectl apply -n argocd -f .devcontainer/argocd-no-tls.yaml
 	@kubectl apply -n argocd -f .devcontainer/argocd-nodeport.yaml
 	@kubectl apply -n argocd -f .devcontainer/argocd-configmap.yaml
 	@echo "Restart ArgoCD server..."

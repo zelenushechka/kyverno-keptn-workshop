@@ -36,7 +36,7 @@
 
 	// add labels
 	"portsAttributes": {
-		"30100": { "label": "ArgoCD HTTP" },
+		"30100": { "label": "ArgoCD HTTP", "protocol": "https" },
 		"30101": { "label": "Grafana" },
 		"30102": { "label": "Prometheus" },
 		"30103": { "label": "DemoApp-Dev" },
@@ -52,12 +52,10 @@
 				"terminal.integrated.defaultProfile.linux": "zsh"
 			},			
 			"extensions": [
-				"ms-azuretools.vscode-docker",
 				"ms-kubernetes-tools.vscode-kubernetes-tools",
 				"davidanson.vscode-markdownlint",
 				"gruntfuggly.todo-tree",
-				"mutantdino.resourcemonitor",
-				"humao.rest-client"
+				"mutantdino.resourcemonitor"
 			]
 		}
 	},
