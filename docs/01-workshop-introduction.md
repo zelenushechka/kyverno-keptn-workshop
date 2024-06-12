@@ -17,6 +17,7 @@ Your Dev environment has multiple tools preconfigured such as:
 - ArgoCD CLI
 
 Your workshop cluster will include the following preconfigured components:
+
 - [ArgoCD](https://argoproj.github.io/argo-cd/)
 - [Keptn](https://keptn.sh/)
 - [Kyverno](https://kyverno.io/)
@@ -24,4 +25,4 @@ Your workshop cluster will include the following preconfigured components:
 - [Jaeger Operator](https://github.com/jaegertracing/jaeger-operator)
 - [Prometheus/Grafana Stack](https://prometheus-operator.dev/)
 - [Cert-Manager](https://cert-manager.io/)
-- Demo Application
+
