@@ -1,20 +1,24 @@
 {
 	"name": "Kyverno-Keptn-Workshop",
-	//"dockerFile": "Dockerfile",
-	//"image": "ghcr.io/heckelmann/heckelmann/kyverno-keptn-workshop:latest",
+
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
 
 	// do not change these if you want Docker in Docker support
-	//"runArgs": ["--init", "--privileged", "--network=host"],
-	//"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
-	//"overrideCommand": false,
+	// "runArgs": ["--init", "--privileged", "--network=host"],
+	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
+	// "overrideCommand": false,
 
-	"dockerFile": "Dockerfile",
-	"runArgs": ["--init", "--privileged"],
-	"mounts": ["source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"],
-	"overrideCommand": false,
-
-	// some base images require a specific user name
-	"remoteUser": "vscode",
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"enableNonRootDocker": "true",
+			"moby": "true"
+		},
+		"ghcr.io/mpriscella/features/kind:1": {
+			"version": "latest"
+		}
+	},
 
 	"hostRequirements": {
 		"cpus": 4
