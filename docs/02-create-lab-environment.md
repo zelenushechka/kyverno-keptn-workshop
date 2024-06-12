@@ -6,21 +6,25 @@ Go to https://github.com/heckelmann/kyverno-keptn-workshop and fork the reposito
 
 Make sure the forked repository visability is set to `Public`.
 
-![Fork Repository](assets/01-fork-repository.png)
+![Fork Repository](assets/02-fork-repository.png)
 
 
 ## Start GitHub CodeSpace
 
 In your fork, go to "Code" then switch to the "Codespaces" tab and click "Create codespace on main"
 
-![Fork Repository](assets/01-create-codespace.png)
+![Fork Repository](assets/02-create-codespace.png)
 
 A new Window will open with the Codespace. This will take a few minutes to start.
 
 ## Change Application Path
 
-To allow ArgoCD to use the application manifests stored in the `gitops` folder, select the gitops folder and search and replace the `https://github.com/heckelmann/kyverno-keptn-workshop.git` with your Repository URL.
+To point ArgoCD and Keptn Tasks to your repository, select the gitops folder and search and replace the following:
 
+- `https://github.com/heckelmann/kyverno-keptn-workshop.git` with your Repository URL.
+- `https://raw.githubusercontent.com/heckelmann/kyverno-keptn-workshop` with your Repository URL for raw content.
+
+![Find and Replace](assets/02-find-and-replace.png)
 
 ## Create GitHub API Token and K8s Secret
 
@@ -30,7 +34,7 @@ Select access only to your forked repository and set the permission on `Actions`
 
 Note down the generated token.
 
-![Fork Repository](assets/01-create-token.png)
+![Fork Repository](assets/02-create-token.png)
 
 Switch back to your Codespace and create a Kubernetes secret with the token:
 
@@ -46,5 +50,34 @@ kubectl create secret generic github-token -n demo-app-dev --from-literal=SECURE
 Open a new Terminal within your Codespace and run the following command:
 
 ```bash
-make create
+> make create
+Creating KinD cluster
+Creating cluster "workshop-cluster" ...
+ ✓ Ensuring node image (kindest/node:v1.30.0) 🖼 
+ ✓ Preparing nodes 📦  
+ ✓ Writing configuration 📜 
+ ✓ Starting control-plane 🕹️ 
+ ✓ Installing CNI 🔌 
+ ✓ Installing StorageClass 💾 
+Set kubectl context to "kind-workshop-cluster"
+
+...
+
+application.argoproj.io/kyverno-keptn-workshop created
+ArgoCD Admin Password
+YOURPASSWORD
+
+🎉 Installation Complete! 🎉
 ```
+
+This will spin up a KinD Cluster within your Codespace, install ArgoCD and add create the `app-of-apps` application, which will deploy all other components.
+
+*Pleate note the ArgoCD Admin Password, which will be displayed at the end of the installation.* 
+
+You can now access ArgoCD by clicking on the exposed port of your GitHub Code Space
+
+![Access ArgoCD](assets/02-access-argo.png)
+
+After logging in with the `admin` user and the password displayed during the installation, you will see the ArgoCD Web Console.
+
+![Access ArgoCD Web](assets/02-argocd-web-console.png)

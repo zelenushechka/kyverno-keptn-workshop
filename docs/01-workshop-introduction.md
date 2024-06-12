@@ -16,7 +16,7 @@ Your Dev environment has multiple tools preconfigured such as:
 - kubectl
 - ArgoCD CLI
 
-Your workshop cluster will include the following components:
+Your workshop cluster will include the following preconfigured components:
 - [ArgoCD](https://argoproj.github.io/argo-cd/)
 - [Keptn](https://keptn.sh/)
 - [Kyverno](https://kyverno.io/)
