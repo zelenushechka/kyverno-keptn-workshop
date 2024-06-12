@@ -11,7 +11,11 @@ Make sure the forked repository visability is set to `Public`.
 
 ## Start GitHub CodeSpace
 
+In your fork, go to "Code" then switch to the "Codespaces" tab and click "Create codespace on main"
 
+![Fork Repository](assets/01-create-codespace.png)
+
+A new Window will open with the Codespace. This will take a few minutes to start.
 
 ## Change Application Path
 
@@ -35,4 +39,12 @@ GH_REPO_OWNER=<YOUR_GITHUB_USER>
 GH_REPO=<YOUR_GITHUB_REPO>
 GH_API_TOKEN=<YOUR_GITHUB_TOKEN>
 kubectl create secret generic github-token -n demo-app-dev --from-literal=SECURE_DATA="{\"githubRepo\":\"${GH_REPO}\",\"githubRepoOwner\":\"${GH_REPO_OWNER}\",\"apiToken\":\"${GH_API_TOKEN}\"}"
+```
+
+## Start the Workshop Kubernetes Cluster
+
+Open a new Terminal within your Codespace and run the following command:
+
+```bash
+make create
 ```
