@@ -12,7 +12,7 @@ spec:
       chart: kyverno
     - repoURL: 'https://github.com/heckelmann/kyverno-keptn-workshop.git'
       targetRevision: main
-      path: "gitops/infrastructure/kyverno-permissions"
+      path: "gitops/infrastructure/permissions"
   destination:
     namespace: kyverno
     server: 'https://kubernetes.default.svc'

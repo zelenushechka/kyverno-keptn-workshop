@@ -15,6 +15,7 @@ spec:
             - name: secret-volume
               mountPath: /etc/argosecret
       restartPolicy: Never
+      serviceAccountName: argocd-rollback
       volumes:
         - name: secret-volume
           secret:
