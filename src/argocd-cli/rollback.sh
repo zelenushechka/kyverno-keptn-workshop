@@ -10,8 +10,7 @@ fi
 secret=$(cat /etc/argosecret/password)
 
 # Login to ArgoCD server
-echo argocd login argocd-server.argocd.svc.cluster.local --plaintext --username admin --password "$secret"
-argocd login argocd-server.argocd.svc.cluster.local --plaintext --username admin --password "$secret"
+argocd login argocd-server.argocd.svc.cluster.local --insecure --username admin --password "$secret"
 
 # Rollback application in the specified project
 argocd app rollback "$1"
