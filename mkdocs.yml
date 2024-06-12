@@ -31,8 +31,12 @@ edit_uri: edit/main/web-docs/
 nav:
   - 'Home': 'index.md'
   - 'Tutorial Steps':
-      - 'Preparation': 'index.md'
-      - '1: Create Codespace': '1-create-lab-environment.md'
+      - '1: Overview': '01-workshop-introduction.md'
+      - '2: Setup Lab Environment': '02-create-lab-environment.md'
+      - '3: Block Deployments': '02-create-lab-environment.md'
+      - '4: Evaluate Deployments': '02-create-lab-environment.md'
+      - '4: Promote Deployments': '02-create-lab-environment.md'
+      - '5: Deployment Observability': '05-deployment-observability.md'
 
 # pip install mkdocs-macros-plugin
 # Allows use of variables (see `extras` below)
