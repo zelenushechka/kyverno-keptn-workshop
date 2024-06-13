@@ -163,3 +163,6 @@ The evaluation will pass because the average latency of the application is less 
 
 ![Task Execution](assets/05-evaluation-status.png)
 
+You should see a new Pull Request in your repository which promotes the deployment to the production environment.
+
+![Promotion PR](assets/05-promotion-pr.png)
