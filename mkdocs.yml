@@ -36,7 +36,8 @@ nav:
       - '3: The system Explained': '03-the-system-explained.md'
       - '4: Pre Deployment Checks': '04-pre-deployment-checks.md'
       - '5: Evaluate & Promote Deployments': '05-evaluate-and-promote.md'
-      - '6: Deployment Observability': '05-deployment-observability.md'
+      - '6: Deployment Observability': '06-deployment-observability.md'
+  - 'Final Exam': 'final-exam.md'
 
 # pip install mkdocs-macros-plugin
 # Allows use of variables (see `extras` below)

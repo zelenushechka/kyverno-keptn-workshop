@@ -1,0 +1,17 @@
+apiVersion: lifecycle.keptn.sh/v1
+kind: KeptnTaskDefinition
+metadata:
+  name: promote
+  namespace: demo-app-dev
+spec:
+  container:
+    name: promote
+    env:
+    - name: ACTION
+      value: promote
+    - name: SECURE_DATA
+      valueFrom:
+        secretKeyRef:
+          key: SECURE_DATA
+          name: github-token
+    image: ghcr.io/heckelmann/workshop-registry/promote:latest

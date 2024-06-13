@@ -28,5 +28,6 @@ metadata:
   namespace: demo-app-prod
 spec:
   provider:
-    name: prometheus
-  query: "\{\{ printf "sum by (path) (rate(http_request_duration_seconds_sum\{namespace='demo-app-prod', path='/'\}[1m]) / rate(http_request_duration_seconds_count\{path='/'\}[1m]))" \}\}"
+    name: prometheus  
+  query: {% raw %}"{{ printf "sum by (path) (rate(http_request_duration_seconds_sum{namespace='demo-app-prod', path='/'}[1m]) / rate(http_request_duration_seconds_count{path='/'}[1m]))" }}"{% endraw %}
+  
