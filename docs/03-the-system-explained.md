@@ -14,6 +14,10 @@ Inside of the `demo-app-dev` and `demo-app-prod` namespace, you will find a coup
 - [`AnalysisDefinition`](#analysisdefinition)
 - [`AnalysisValueTemplate`](#analysisvaluetemplate)
 
+## Keptn in a Nutshell
+
+![Keptn Overview](assets/03-keptn-overview.png)
+
 ## KeptnAppContext
 
 The [KeptnAppContext](https://keptn.sh/stable/docs/reference/crd-reference/appcontext/) custom resource works with the corresponding KeptnApp resource that has the same name and is located in the same namespace. It allows you to
@@ -129,7 +133,6 @@ An [AnalysisDefinition](https://keptn.sh/stable/docs/reference/crd-reference/ana
 An [AnalysisValueTemplate](https://keptn.sh/stable/docs/reference/crd-reference/analysisvaluetemplate/) resource defines a Service Level Indicator (SLI), which identifies the data to be analyzed by a data source to use and the query to issue. One Analysis can use data from multiple AnalysisValueTemplates.
 
 ```yaml
----
 apiVersion: metrics.keptn.sh/v1
 kind: AnalysisDefinition
 metadata:
