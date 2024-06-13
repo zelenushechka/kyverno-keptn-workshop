@@ -147,9 +147,19 @@ Commit and push the changes to your repository and wait for the deployment to fi
 
 ### Demo
 
+Use K9 to check the status of the deployment and the load test.
+
 Change the Version in `gitops/dev/demo-app/values.yaml` to `v2` and commit and push the changes to your repository.	
 
 ArgoCD should start to sync the `demo-app-dev` application and deploy the new version of the application.
 
-Use K9 to check the status of the deployment and the load test.
+![Task Execution](assets/05-task-execution.png)
+
+The evaluation will fail because the average latency of the application is higher than 1 second, and no promotion will be triggered.
+
+Now change back the Version in `gitops/dev/demo-app/values.yaml` to `v1` and commit and push the changes to your repository.
+
+The evaluation will pass because the average latency of the application is less than 1 second, and the promotion will be triggered.
+
+![Task Execution](assets/05-evaluation-status.png)
 
