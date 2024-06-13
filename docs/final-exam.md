@@ -12,7 +12,7 @@ Your task is to create three Kyverno Policies to automatically fix the issue.
 
 1. The first policy should create a load test job as soon as a flag is changed in the flagdefinition custom resource.
 2. The second policy should check if the load test job is completed and trigger a KeptnAnalysis.
-3. The third policy should check the result of the KeptnAnalysis and roll back the flagdefinition to it's previous state.
+3. The third policy should check the result of the KeptnAnalysis and roll back the flagdefinition to it's previous state. To do this, we have already prepared a Job which you can find in the root of the repository.
 
 ## Tips and Tricks
 
