@@ -16,7 +16,7 @@ Your task is to create three Kyverno Policies to automatically fix the issue.
 
 ## Tips and Tricks
 
-## Permissions for Kyverno
+### Permissions for Kyverno
 
 To enable the Kyverno Background Controller to watch and generate resources that are needed within this exam, you have to add addional ClusterRoles to the Kyverno Controller.
 
@@ -47,7 +47,7 @@ rules:
   - delete
 ```
 
-## Permissions for ArgoCD
+### Permissions for ArgoCD
 
 One of the Policies you will create needs the ability to patch ArgoCD Application resources. This is already applied in your cluster.
 
@@ -81,7 +81,7 @@ subjects:
     namespace: argocd
 ```
 
-## Argo Sync for Generate Policies
+### Argo Sync for Generate Policies
 
 Generate Policies are immutable. To force ArgoCD to recreate the policies during the Sync process, apply the following annotations to each of your policy custom resource:
 
@@ -93,10 +93,10 @@ metadata:
     argocd.argoproj.io/sync-options: Force=true,Replace=true
 ```
 
-## Resource Naming
+### Resource Naming
 
 Make sure to append this Kyverno Variable to each of your generated resources to prevent naming conflicts:
 
 ```
-resource-name-{{request.object.metadata.resourceVersion}}
+{% raw %}resource-name-{{request.object.metadata.resourceVersion}}{% endraw %}
 ```
