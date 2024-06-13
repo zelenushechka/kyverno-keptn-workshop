@@ -131,6 +131,7 @@ An [AnalysisDefinition](https://keptn.sh/stable/docs/reference/crd-reference/ana
 An [AnalysisValueTemplate](https://keptn.sh/stable/docs/reference/crd-reference/analysisvaluetemplate/) resource defines a Service Level Indicator (SLI), which identifies the data to be analyzed by a data source to use and the query to issue. One Analysis can use data from multiple AnalysisValueTemplates.
 
 ```yaml
+{% raw %} 
 apiVersion: metrics.keptn.sh/v1
 kind: AnalysisDefinition
 metadata:
@@ -162,5 +163,6 @@ metadata:
 spec:
   provider:
     name: prometheus
-  query: "{{ printf "sum by (path) (rate(http_request_duration_seconds_sum{namespace='demo-app-prod', path='/'}[1m]) / rate(http_request_duration_seconds_count{path='/'}[1m]))" }}"    
+  query: "{{ printf "sum by (path) (rate(http_request_duration_seconds_sum{namespace='demo-app-prod', path='/'}[1m]) / rate(http_request_duration_seconds_count{path='/'}[1m]))" }}" 
+{% endraw %}    
 ```
