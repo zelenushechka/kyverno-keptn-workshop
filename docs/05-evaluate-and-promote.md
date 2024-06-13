@@ -163,6 +163,12 @@ The evaluation will pass because the average latency of the application is less 
 
 ![Task Execution](assets/05-evaluation-status.png)
 
+```bash
+k -n demo-app-dev get keptnevaluation
+NAME                                   APPNAME    APPVERSION            WORKLOADNAME   WORKLOADVERSION   RETRYCOUNT   EVALUATIONSTATUS                                                                                                                             OVERALLSTATUS
+post-eval-demoapp-heatlh-check-17614   demo-app   v2-4y4hftehfeyu7den                                    10           {"demoapp-latency":{"message":"value '4.572755924142906' did not meet objective '\u003c1'","status":"Failed","value":"4.572755924142906"}}   Failed
+```
+
 You should see a new Pull Request in your repository which promotes the deployment to the production environment.
 
 ![Promotion PR](assets/05-promotion-pr.png)
