@@ -41,8 +41,6 @@ spec:
     - demoapp-heatlh-check
   promotionTasks:
     - promote
-  metadata:
-    commitID: {{.Values.commitID}}
 ```
 
 ## KeptnTaskDefinition
