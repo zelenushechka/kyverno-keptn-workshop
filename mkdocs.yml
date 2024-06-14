@@ -5,6 +5,8 @@ theme:
       # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
+      primary: light blue
+      accent: light blue
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
@@ -12,13 +14,19 @@ theme:
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
+      primary: light blue
+      accent: light blue
       toggle:
         icon: material/brightness-4
-        name: Switch to light mode
+        name: Switch to light mode        
   icon:
     repo: fontawesome/brands/github
   features:
     - content.code.copy
+    - navigation.footer
+  font: 
+    text: Exo 2
+    code: Roboto Mono
 
 docs_dir: docs
 # Powers the GitHub links in top bar
@@ -50,3 +58,13 @@ extra:
   # we can use {{ site.repo_name }} (see above)
   # instead
   temp_site_url: "heckelmann/kyverno-keptn-workshop"
+  social:
+    - icon: material/github
+      link: https://github.com/heckelmann/kyverno-keptn-workshop
+    - icon: material/twitter
+      link: https://twitter.com/wurstsalat
+    - icon: material/linkedin
+      link: https://www.linkedin.com/in/christian-heckelmann-82375a25/
+    - icon: material/linkedin
+      link: https://www.linkedin.com/in/eddycharly/
+        
