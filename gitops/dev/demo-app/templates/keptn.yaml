@@ -5,91 +5,12 @@ metadata:
   namespace: demo-app-dev
 spec:
   preDeploymentTasks:
-    - maintenance-window-check
+    # - maintenance-window-check
   postDeploymentTasks:
-    - load-test
+    # - load-test
   postDeploymentEvaluations:
-    - demoapp-heatlh-check
+    # - demoapp-heatlh-check
   promotionTasks:
-    - promote
+    # - promote
   metadata:
     commitID: {{.Values.commitID}}
----
-apiVersion: lifecycle.keptn.sh/v1alpha3
-kind: KeptnTaskDefinition
-metadata:
-  name: load-test
-  namespace: demo-app-dev
-spec:
-  retries: 0
-  timeout: "5m"
-  container:
-    name: testy-test
-    image: grafana/k6:0.45.0
-    command:
-      - 'k6'
-      - 'run'
-      - 'https://raw.githubusercontent.com/heckelmann/kyverno-keptn-workshop/main/functions/load-dev.js'
-
----
-apiVersion: lifecycle.keptn.sh/v1alpha3
-kind: KeptnTaskDefinition
-metadata:
-  name: maintenance-window-check
-  namespace: demo-app-dev
-spec:
-  retries: 3
-  timeout: "5m"
-  python:
-    httpRef: 
-      url: 'https://raw.githubusercontent.com/heckelmann/kyverno-keptn-workshop/main/functions/checkmaintenance.py'
----
-apiVersion: lifecycle.keptn.sh/v1
-kind: KeptnTaskDefinition
-metadata:
-  name: promote
-  namespace: demo-app-dev
-spec:
-  container:
-    name: promote
-    env:
-    - name: ACTION
-      value: promote
-    - name: SECURE_DATA
-      valueFrom:
-        secretKeyRef:
-          key: SECURE_DATA
-          name: github-token
-    image: ghcr.io/heckelmann/workshop-registry/promote:latest
----
-apiVersion: metrics.keptn.sh/v1alpha3
-kind: KeptnMetricsProvider
-metadata:
-  name: prometheus
-  namespace: demo-app-dev
-spec:
-  type: prometheus
-  targetServer: "http://prometheus-operated.monitoring.svc.cluster.local:9090"
----
-apiVersion: metrics.keptn.sh/v1alpha3
-kind: KeptnMetric
-metadata:
-  name: demoapp-latency
-  namespace: demo-app-dev
-spec:
-  provider:
-    name: prometheus
-  query: 'sum by (path) (rate(http_request_duration_seconds_sum{namespace="demo-app-dev", path="/"}[2m]) / rate(http_request_duration_seconds_count{namespace="demo-app-dev", path="/"}[2m]))'
-  fetchIntervalSeconds: 5
----
-apiVersion: lifecycle.keptn.sh/v1alpha3
-kind: KeptnEvaluationDefinition
-metadata:
-  name: demoapp-heatlh-check
-  namespace: demo-app-dev
-spec:
-  objectives:
-    - keptnMetricRef:
-        name: demoapp-latency
-        namespace: demo-app-dev
-      evaluationTarget: "<1" #less than 1s
