@@ -11,8 +11,24 @@ Unfortunately, the feature is not working as expected, and slows down the alread
 Your task is to create three Kyverno Policies to automatically fix the issue.
 
 1. The first policy should create a load test job as soon as a flag is changed in the flagdefinition custom resource.
+  - You can find the Job in `/excercises/final-exam/load-test-job.yaml`
+  - You need to watch the API Group Kind `FeatureFlag` for an `UPDATE` operation.
+  - Use label selectors to explicitly watch the flagdefinition for the `demo-app`
+    ```
+    app: sample-app
+    type: feature-flag
+    ```
+
 2. The second policy should check if the load test job is completed and trigger a KeptnAnalysis.
-3. The third policy should check the result of the KeptnAnalysis and roll back the flagdefinition to it's previous state. To do this, we have already prepared a Job which you can find in the root of the repository.
+  - You can find a KeptnAnalysis in `/excercises/final-exam/keptn-analysis.yaml`.
+  - You need to watch the API Group Kind `Job/status` for an `UPDATE` operation.
+  - Use a precondition to check if the Job is completed `request.object.status.succeeded`
+
+
+3. The third policy should check the result of the KeptnAnalysis and roll back the flagdefinition to it's previous state. 
+  - You can find the Job in `/excercises/final-exam/argo-rollback.yaml`.
+  - You need to watch the API Group Kind `Analysis/status` for an `UPDATE` operation.
+  - Use a precondition to check if the Analysis is completed `request.object.status.state == "Completed"` and the roll back if  `request.object.status.pass != "pass"` be aware that this field does not exist if the Analysis is not completed or failed.
 
 ## Tipps and Lessons Learned 
 
@@ -110,3 +126,8 @@ kubectl -n argocd patch --type='merge' application kyverno-keptn-workshop -p "{\
 ```
 
 Please see `/src/agro-cli/rollout.sh` for an example.
+
+### Kyverno Policies with Preconditions and ArgoCD
+
+Use within your precondition check instead of Quotes or Double Quotes a Backtick to prevent issues with the YAML Parser.
+
