@@ -14,7 +14,7 @@ Your task is to create three Kyverno Policies to automatically fix the issue.
 2. The second policy should check if the load test job is completed and trigger a KeptnAnalysis.
 3. The third policy should check the result of the KeptnAnalysis and roll back the flagdefinition to it's previous state. To do this, we have already prepared a Job which you can find in the root of the repository.
 
-## Tips and Tricks
+## Tipps and Lessons Learned 
 
 ### Permissions for Kyverno
 
@@ -100,3 +100,13 @@ Make sure to append this Kyverno Variable to each of your generated resources to
 ```
 {% raw %}resource-name-{{request.object.metadata.resourceVersion}}{% endraw %}
 ```
+
+### Argo Sync and Rollback
+
+To disable autosync in argo for a specific application, you can't do this via the CLI, instead you need to patch the application resource:
+
+```bash
+kubectl -n argocd patch --type='merge' application kyverno-keptn-workshop -p "{\"spec\":{\"syncPolicy\":null}}"
+```
+
+Please see `/src/agro-cli/rollout.sh` for an example.
