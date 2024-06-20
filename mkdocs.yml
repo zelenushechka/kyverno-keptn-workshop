@@ -41,7 +41,7 @@ nav:
   - 'Tutorial Steps':
       - '1: Overview': '01-workshop-introduction.md'
       - '2: Setup Lab Environment': '02-create-lab-environment.md'
-      - '3: The system Explained': '03-the-system-explained.md'
+      - '3: The System Explained': '03-the-system-explained.md'
       - '4: Pre Deployment Checks': '04-pre-deployment-checks.md'
       - '5: Evaluate & Promote Deployments': '05-evaluate-and-promote.md'
       - '6: Deployment Observability': '06-deployment-observability.md'
