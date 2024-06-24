@@ -4,7 +4,7 @@ Great! You made it to the final exam, where you will apply all the knowledge you
 
 You should have running `v3` of our Application in Production, which has a little special feature. It is using a Feature Flag to enable a new functionality.
 
-For Feature Flagging we are using OpenFeature and it's Evaluation Engine FlagD.
+For Feature Flagging we are using [OpenFeature](https://openfeature.dev/) and it's Evaluation Engine [FlagD](https://flagd.dev/).
 
 Unfortunately, the feature is not working as expected, and slows down the already deployed application.
 
