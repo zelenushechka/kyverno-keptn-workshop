@@ -4,7 +4,7 @@ The workshop environment is now completely installed. If you look at Argo, you w
 
 A `demo-app-dev` and a `demo-app-prod` is already installed, alongside with all other tools mentioned before.
 
-Inside of the `demo-app-dev` and `demo-app-prod` namespace, you will find a couple of resources such as:
+During the workshop, you will interact with the following components:
 
 - [`KeptnAppContext`](#keptnappcontext)
 - [`KeptnTaskDefinition`](#keptntaskdefinition)
