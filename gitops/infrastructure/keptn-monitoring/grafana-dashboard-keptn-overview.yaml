@@ -763,7 +763,7 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "builder",
-              "expr": "sum by(job) (keptn_deployment_count{job=\"scrape_klt\"})",
+              "expr": "sum by(job) (keptn_deployment_count_total{job=\"scrape_klt\"})",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
