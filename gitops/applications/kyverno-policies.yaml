@@ -8,7 +8,7 @@ metadata:
 spec:
   source:
     repoURL: 'https://github.com/heckelmann/kyverno-keptn-workshop.git'
-    targetRevision: final-exam
+    targetRevision: main
     path: "gitops/infrastructure/kyverno-policies"
   destination:
     namespace: kyverno
