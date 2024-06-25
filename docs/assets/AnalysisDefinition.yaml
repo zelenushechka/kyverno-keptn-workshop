@@ -20,14 +20,3 @@ spec:
   totalScore:
     passPercentage: 90
     warningPercentage: 75
----
-apiVersion: metrics.keptn.sh/v1
-kind: AnalysisValueTemplate
-metadata:
-  name: request-duration
-  namespace: demo-app-prod
-spec:
-  provider:
-    name: prometheus  
-  query: {% raw %}"{{ printf "sum by (path) (rate(http_request_duration_seconds_sum{namespace='demo-app-prod', path='/'}[1m]) / rate(http_request_duration_seconds_count{path='/'}[1m]))" }}"{% endraw %}
-  

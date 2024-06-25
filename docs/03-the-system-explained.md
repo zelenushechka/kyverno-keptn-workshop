@@ -9,10 +9,10 @@ During the workshop, you will interact with the following components:
 - [`KeptnAppContext`](#keptnappcontext)
 - [`KeptnTaskDefinition`](#keptntaskdefinition)
 - [`KeptnEvaluationDefinition`](#keptnevaluationdefinition)
-- [`KeptnMetric`](#keptnmetric)
 - [`KeptnMetricsProvider`](#keptnmetricsprovider)
-- [`AnalysisDefinition`](#analysisdefinition)
+- [`KeptnMetric`](#keptnmetric)
 - [`AnalysisValueTemplate`](#analysisvaluetemplate)
+- [`AnalysisDefinition`](#analysisdefinition)
 
 ## Keptn in a Nutshell
 
@@ -94,9 +94,24 @@ spec:
       evaluationTarget: "<1" # less than 1 second
 ```
 
-## KeptnMetric
+## KeptnMetricsProvider
 
 A [KeptnMetricsProvider](https://keptn.sh/stable/docs/reference/crd-reference/metricsprovider/) resource defines an instance of a data provider (such as Prometheus, Thanos, Cortex, Dynatrace, or Datadog) that is used by one or more KeptnMetric resources.
+
+```yaml
+apiVersion: metrics.keptn.sh/v1alpha3
+kind: KeptnMetricsProvider
+metadata:
+  name: prometheus
+  namespace: demo-app-dev
+spec:
+  type: prometheus
+  targetServer: "http://prometheus-operated.monitoring.svc.cluster.local:9090"
+```
+
+## KeptnMetric
+
+A [KeptnMetric](https://keptn.sh/stable/docs/reference/crd-reference/metric/) represents a metric that is collected from a provider. Providing the metrics as a custom resource facilitates the reusability of this data across multiple components and allows using multiple observability platforms for different metrics at the same time.
 
 ```yaml
 apiVersion: metrics.keptn.sh/v1alpha3
@@ -111,29 +126,26 @@ spec:
   fetchIntervalSeconds: 5
 ```
 
-## KeptnMetricsProvider
+## AnalysisValueTemplate
 
-A [KeptnMetric](https://keptn.sh/stable/docs/reference/crd-reference/metric/) represents a metric that is collected from a provider. Providing the metrics as a custom resource facilitates the reusability of this data across multiple components and allows using multiple observability platforms for different metrics at the same time.
+An [AnalysisValueTemplate](https://keptn.sh/stable/docs/reference/crd-reference/analysisvaluetemplate/) resource defines a Service Level Indicator (SLI), which identifies the data to be analyzed by a data source to use and the query to issue. One Analysis can use data from multiple AnalysisValueTemplates.
 
 ```yaml
-apiVersion: metrics.keptn.sh/v1alpha3
-kind: KeptnMetricsProvider
+apiVersion: metrics.keptn.sh/v1
+kind: AnalysisValueTemplate
 metadata:
-  name: prometheus
-  namespace: demo-app-dev
+  name: request-duration
+  namespace: demo-app-prod
 spec:
-  type: prometheus
-  targetServer: "http://prometheus-operated.monitoring.svc.cluster.local:9090"
+  provider:
+    name: prometheus
+  query: {% raw %}"{{ printf "sum by (path) (rate(http_request_duration_seconds_sum{namespace='demo-app-prod', path='/'}[1m]) / rate(http_request_duration_seconds_count{path='/'}[1m]))" }}"{% endraw %}
 ```
 
 ## AnalysisDefinition
 
 An [AnalysisDefinition](https://keptn.sh/stable/docs/reference/crd-reference/analysisdefinition/) resource defines the list of Service Level Objectives (SLOs) for an Analysis.
 
-## AnalysisValueTemplate
-
-An [AnalysisValueTemplate](https://keptn.sh/stable/docs/reference/crd-reference/analysisvaluetemplate/) resource defines a Service Level Indicator (SLI), which identifies the data to be analyzed by a data source to use and the query to issue. One Analysis can use data from multiple AnalysisValueTemplates.
-
 ```yaml
-{% include "assets/AnalysisValueTemplate.yaml" %}
+{% include "assets/AnalysisDefinition.yaml" %}
 ```
