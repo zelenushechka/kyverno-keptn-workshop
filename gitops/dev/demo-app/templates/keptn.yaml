@@ -7,9 +7,9 @@ spec:
   preDeploymentTasks:
     # - maintenance-window-check
   postDeploymentTasks:
-    # - load-test
+    - load-test
   postDeploymentEvaluations:
-    # - demoapp-heatlh-check
+    - demoapp-heatlh-check
   promotionTasks:
     # - promote
   metadata:

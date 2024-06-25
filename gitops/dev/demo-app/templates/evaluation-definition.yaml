@@ -1,0 +1,11 @@
+apiVersion: lifecycle.keptn.sh/v1alpha3
+kind: KeptnEvaluationDefinition
+metadata:
+  name: demoapp-heatlh-check
+  namespace: demo-app-dev
+spec:
+  objectives:
+    - keptnMetricRef:
+        name: demoapp-latency
+        namespace: demo-app-dev
+      evaluationTarget: "<1" #less than 1s
