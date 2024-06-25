@@ -7,7 +7,7 @@ spec:
   objectives:
   - analysisValueTemplateRef:
       name: request-duration
-    keyObjective: false
+    keyObjective: true
     target:
       failure:
         greaterThan:
@@ -16,7 +16,6 @@ spec:
         greaterThan:
           fixedValue: 2
     weight: 1
-    keyObjective: true
   totalScore:
     passPercentage: 90
     warningPercentage: 75
