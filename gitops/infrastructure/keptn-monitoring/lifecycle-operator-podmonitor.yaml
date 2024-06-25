@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: lifecycle-operator-metrics-service
+  namespace: keptn-system
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: keptn
+      app.kubernetes.io/name: lifecycle-operator 
+  podMetricsEndpoints:
+  - port: metrics
+    interval: 5s
+    scrapeTimeout: 4s
