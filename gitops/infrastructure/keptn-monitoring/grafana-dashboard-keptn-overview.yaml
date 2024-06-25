@@ -828,7 +828,7 @@ data:
               },
               "editorMode": "builder",
               "exemplar": false,
-              "expr": "sort(sum by(le) (keptn_deployment_duration_bucket{job=\"scrape_klt\", le!=\"+Inf\"}))",
+              "expr": "sort(sum by(le) (keptn_deployment_duration_seconds_bucket{job=\"scrape_klt\", le!=\"+Inf\"}))",
               "format": "time_series",
               "instant": false,
               "legendFormat": "{{le}}",
