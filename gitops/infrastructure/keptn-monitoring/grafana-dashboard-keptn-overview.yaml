@@ -298,7 +298,7 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "builder",
-              "expr": "sum by(job) (keptn_task_count{job=\"scrape_klt\"})",
+              "expr": "sum by(job) (keptn_task_count_total{job=\"scrape_klt\"})",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -456,7 +456,7 @@ data:
               },
               "editorMode": "builder",
               "exemplar": false,
-              "expr": "sort(sum by(le) (keptn_task_duration_bucket{job=\"scrape_klt\", le!=\"+Inf\"}))",
+              "expr": "sort(sum by(le) (keptn_task_duration_seconds_bucket{job=\"scrape_klt\", le!=\"+Inf\"}))",
               "format": "time_series",
               "instant": false,
               "legendFormat": "{{le}}",
@@ -551,7 +551,7 @@ data:
               },
               "editorMode": "builder",
               "exemplar": false,
-              "expr": "sort(sum by(le) (keptn_evaluation_duration_bucket{job=\"scrape_klt\", le!=\"+Inf\"}))",
+              "expr": "sort(sum by(le) (keptn_evaluation_duration_seconds_bucket{job=\"scrape_klt\", le!=\"+Inf\"}))",
               "format": "time_series",
               "instant": false,
               "legendFormat": "{{le}}",
