@@ -52,6 +52,11 @@ nav:
 plugins:
   - macros
 
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+
 extra:
   # when code is updated
   # this var can be removed and
