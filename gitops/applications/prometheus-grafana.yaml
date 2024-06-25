@@ -28,7 +28,7 @@ spec:
               - job_name: "scrape_klt"
                 scrape_interval: 5s
                 static_configs:
-                  - targets: ['lifecycle-operator-metrics-service.keptn-system.svc.cluster.local:2222']
+                  - targets: ['lifecycle-operator-metrics-service.keptn-system.svc.cluster.local:2222','metrics-operator-service.keptn-system.svc.cluster.local:9999']
   destination:
     server: 'https://kubernetes.default.svc' # server where Keptn will be deployed
     namespace: monitoring  # namespace where Keptn will be deployed
