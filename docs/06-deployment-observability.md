@@ -9,3 +9,5 @@ Open Grafana, which has been deployed on Port `30101` in our workshop environmen
 Login with username `admin` and password `admin`.
 
 Traces from different stages are linked together, so you get an end-to-end trace from the start of your application beginning on dev to the end of the application in production.
+
+![Dora](assets/06-dora-metrics.png)
