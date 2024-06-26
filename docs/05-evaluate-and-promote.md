@@ -1,10 +1,12 @@
 # Evaluate and Promote Deployments
 
-You will learn how to prevent the promotion of a new version of your application if the KeptnEvaluation fails and how to use the promotion task to promote the deployment to a different environment.
+You will learn how to prevent the promotion of a new version of your application if the KeptnEvaluation fails and how to use the promotion task to promote the deployment to the next environment.
 
-We will run a K6 Load Test as Post-Deployment Task to generate load on the application and calculate the average latency of the application. The average latency is then used to evaluate the performance of the application. After we will analyze the results and promote the deployment to the production environment if the evaluation passes.
+We will run a K6 Load Test as Post-Deployment Task to generate load on the application and calculate the average latency. After we will analyze the results and promote the deployment to the production environment if the evaluation passes.
 
-Please note that the evaluation of the performance is based on a simple example and should be adapted to your specific use case.
+!!! note
+    
+    Please note that the evaluation of the performance is based on a simple example and should be adapted to your specific use case.
 
 See `gitops/dev/demo-app-dev/templates/podmonitor.yaml` for the Prometheus PodMonitor configuration.
 

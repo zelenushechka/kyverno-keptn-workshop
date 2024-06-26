@@ -59,13 +59,13 @@ Commit and push the changes to your repository and refresh in ArgoCD the `demo-a
 
 We will deploy a new version of the `demo-app-dev` application and check if the maintenance window check is executed before the deployment.
 
-Change the Version in `gitops/dev/demo-app/values.yaml` to `v3` and commit and push the changes to your repository.	
+Change the Version in `gitops/dev/demo-app/values.yaml` to `v1.1` and commit and push the changes to your repository.	
 
 You should see the maintenance window check in K9s before the deployment is started.
 
 Now we remove the Maintenance Window and re-deploy the application. The deployment should now be successful.
 
-To do so, we can increase the `revision` of the `KeptnApp` with this Command:
+To restart a blocked deployment you need to increase the `revision` of the `KeptnApp` with this Command:
 
 ```bash
 kubectl -n demo-app-dev patch keptnapp demo-app --type='json' -p='[{"op": "replace", "path": "/spec/revision", "value": 2}]'
