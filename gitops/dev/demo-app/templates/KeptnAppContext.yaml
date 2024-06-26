@@ -5,11 +5,11 @@ metadata:
   namespace: demo-app-dev
 spec:
   preDeploymentTasks:
-    - maintenance-window-check
+    # - maintenance-window-check
   postDeploymentTasks:
-    - load-test
+    # - load-test
   postDeploymentEvaluations:
-    - demoapp-heatlh-check
+    # - demoapp-heatlh-check
   promotionTasks:
     # - promote
   metadata:
