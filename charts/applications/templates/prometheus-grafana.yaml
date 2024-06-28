@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: '1'
   name: prometheus-grafana
   namespace: argocd
   finalizers:
@@ -10,7 +10,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://prometheus-community.github.io/helm-charts' # helm chart repository
+    repoURL: https://prometheus-community.github.io/helm-charts # helm chart repository
     chart: kube-prometheus-stack # helm chart name
     targetRevision: 48.1.1 # helm chart version - use latest available here
     helm:
@@ -25,12 +25,12 @@ spec:
             podMonitorSelectorNilUsesHelmValues: false
             probeSelectorNilUsesHelmValues: false          
             additionalScrapeConfigs:
-              - job_name: "scrape_klt"
+              - job_name: scrape_klt
                 scrape_interval: 5s
                 static_configs:
                   - targets: ['lifecycle-operator-metrics-service.keptn-system.svc.cluster.local:2222','metrics-operator-service.keptn-system.svc.cluster.local:9999']
   destination:
-    server: 'https://kubernetes.default.svc' # server where Keptn will be deployed
+    server: https://kubernetes.default.svc # server where Keptn will be deployed
     namespace: monitoring  # namespace where Keptn will be deployed
   syncPolicy:
     automated:

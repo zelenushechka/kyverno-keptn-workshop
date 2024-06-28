@@ -4,7 +4,7 @@ metadata:
   name: demo-app-dev
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "10"  
+    argocd.argoproj.io/sync-wave: '10'
 spec:
   project: default
   source:
@@ -13,8 +13,8 @@ spec:
     targetRevision: {{ .Values.repo.revision }}
     helm:
       parameters:
-        - name: "commitID" 
-          value: "$ARGOCD_APP_REVISION"
+        - name: commitID
+          value: $ARGOCD_APP_REVISION
   destination:
     server: https://kubernetes.default.svc
     namespace: demo-app-dev

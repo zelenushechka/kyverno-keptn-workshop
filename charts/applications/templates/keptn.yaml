@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: '1'
   name: keptn
   namespace: argocd
   finalizers:
@@ -10,19 +10,19 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://charts.lifecycle.keptn.sh' # helm chart repository
+    repoURL: https://charts.lifecycle.keptn.sh # helm chart repository
     chart: keptn # helm chart name
     targetRevision: 0.6.0 # helm chart version - use latest available here
     helm:
       parameters:
-        - name: "commitID"
-          value: "$ARGOCD_APP_REVISION"
-        - name: "lifecycleOperator.schedulingGatesEnabled"
-          value: "true"
-        - name: "lifecycleOperator.promotionTasksEnabled"
-          value: "true"
+        - name: commitID
+          value: $ARGOCD_APP_REVISION
+        - name: lifecycleOperator.schedulingGatesEnabled
+          value: 'true'
+        - name: lifecycleOperator.promotionTasksEnabled
+          value: 'true'
   destination:
-    server: 'https://kubernetes.default.svc' # server where Keptn will be deployed
+    server: https://kubernetes.default.svc # server where Keptn will be deployed
     namespace: keptn-system # namespace where Keptn will be deployed
   syncPolicy:
     automated:

@@ -2,17 +2,17 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: '3'
   name: flagd
   namespace: argocd
 spec:
   source:
-    path: "gitops/infrastructure/flagd"
+    path: gitops/infrastructure/flagd
     repoURL: {{ .Values.repo.url }}
     targetRevision: {{ .Values.repo.revision }}
   destination:
     namespace: flagd
-    server: 'https://kubernetes.default.svc'
+    server: https://kubernetes.default.svc
   project: default
   syncPolicy:
     automated:
