@@ -1,3 +1,5 @@
+CLUSTER_NAME            ?= workshop-cluster
+
 .PHONY: help all create
 
 all: ## Create a Kind cluster and wait argocd is ready
@@ -5,7 +7,7 @@ all: ready
 
 create: ## Create a Kind cluster
 	@echo "Creating KinD cluster"
-	@kind create cluster --config cluster/kind-devcontainer.yaml
+	@kind create cluster --name $(CLUSTER_NAME) --config cluster/kind.yaml
 	@echo "Deploy ArgoCD"
 	@kubectl create namespace argocd
 	@kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
@@ -23,6 +25,13 @@ create: ## Create a Kind cluster
 	@echo ""
 	@echo ""
 	@echo "🎉 Installation Complete! 🎉"
+
+delete: ## Delete Kind cluster
+	@echo "Deleting KinD cluster"
+	@kind delete cluster --name $(CLUSTER_NAME)
+	@echo ""
+	@echo ""
+	@echo "🎉 Cluster Deleted! 🎉"
 
 ready: ## Wait argocd is ready
 ready: create
