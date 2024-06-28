@@ -7,9 +7,12 @@ metadata:
   namespace: argocd
 spec:
   source:
-    repoURL: 'https://github.com/heckelmann/kyverno-keptn-workshop.git'
-    targetRevision: main
-    path: "gitops/infrastructure/cert-manager"
+    repoURL: https://charts.jetstack.io
+    chart: cert-manager
+    targetRevision: '*'
+    helm:
+      values: |
+        installCRDs: true
   destination:
     namespace: cert-manager
     server: 'https://kubernetes.default.svc'
