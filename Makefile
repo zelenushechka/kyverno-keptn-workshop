@@ -19,7 +19,7 @@ create: ## Create a Kind cluster
 	@echo "Restart ArgoCD server..."
 	@kubectl -n argocd rollout restart deploy/argocd-server
 	@kubectl -n argocd rollout status deploy/argocd-server --timeout=300s
-	@kubectl apply -f gitops/app-of-apps.yaml
+	@helm install -n argocd app-of-apps ./charts/app-of-apps
 	@echo "ArgoCD Admin Password"
 	@kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 	@echo ""
