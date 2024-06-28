@@ -3,28 +3,28 @@ kind: Cluster
 name: workshop-cluster
 nodes:
 - role: control-plane
-  kubeadmConfigPatches:
-  - |
-    kind: InitConfiguration
-    nodeRegistration:
-      kubeletExtraArgs:
-        node-labels: "ingress-ready=true"
-  extraPortMappings:   
+  extraPortMappings:
+  # ArgoCD
   - hostPort: 30100
     containerPort: 30100
     protocol: TCP
+  # Grafana
   - hostPort: 30101
     containerPort: 30101
     protocol: TCP
+  # Prometheus
   - hostPort: 30102
     containerPort: 30102
     protocol: TCP
+  # Demo app (dev)
   - hostPort: 30103
     containerPort: 30103
     protocol: TCP
+  # Jaeger
   - hostPort: 30104
     containerPort: 30104
-    protocol: TCP  
+    protocol: TCP
+  # Demo app (prod)
   - hostPort: 30105
     containerPort: 30105
-    protocol: TCP  
+    protocol: TCP
