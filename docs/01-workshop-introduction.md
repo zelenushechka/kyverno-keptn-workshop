@@ -8,15 +8,16 @@
 
 ## Lab Overview
 
-Within this workshop we will use a GitHub Codespaces to run a local Kubernetes Cluster and deploy a simple application to it using multiple tools.
+Within this workshop, we will use GitHub Codespaces to run a local Kubernetes Cluster and deploy a simple application to it using multiple tools.
 
 Your Dev environment has multiple tools preconfigured such as:
+
 - KinD (Kubernetes in Docker)
 - K9s (Kubernetes CLI)
 - kubectl
 - ArgoCD CLI
 
-Your workshop cluster will include the following preconfigured components:
+Your workshop cluster will include the following pre-configured components:
 
 - [ArgoCD](https://argoproj.github.io/argo-cd/)
 - [Keptn](https://keptn.sh/)
