@@ -1,14 +1,9 @@
 .PHONY: help all create
 
-help:
-	@echo "Please use \`make <target>' where <target> is one of"
-	@echo "  all         to create a Kind cluster"
-	@echo "  create      to create a Kind cluster"
+all: ## Create a Kind cluster and wait argocd is ready
+all: ready
 
-
-all: create
-
-create:
+create: ## Create a Kind cluster
 	@echo "Creating KinD cluster"
 	@kind create cluster --config cluster/kind-devcontainer.yaml
 	@echo "Deploy ArgoCD"
@@ -28,9 +23,12 @@ create:
 	@echo ""
 	@echo ""
 	@echo "🎉 Installation Complete! 🎉"
-	
 
-ready:
+ready: ## Wait argocd is ready
+ready: create
 	@kubectl wait --for=condition=available deployment/argocd-server -n argocd --timeout=300s
 	@echo "ArgoCD Admin Password"
 	@kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
+help: ## Shows the available commands
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-40s\033[0m %s\n", $$1, $$2}'
