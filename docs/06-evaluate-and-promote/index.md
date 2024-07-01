@@ -150,7 +150,7 @@ Change the Version in `gitops/dev/demo-app/values.yaml` to `v2` and commit and p
 
 ArgoCD should start to sync the `demo-app-dev` application and deploy the new version of the application.
 
-![Task Execution](assets/05-task-execution.png)
+![Task Execution](../assets/05-task-execution.png)
 
 The evaluation will fail because the average latency of the application is higher than 1 second, and no promotion will be triggered.
 
@@ -158,7 +158,7 @@ Now change back the Version in `gitops/dev/demo-app/values.yaml` to `v1` and com
 
 The evaluation will pass because the average latency of the application is less than 1 second, and the promotion will be triggered.
 
-![Task Execution](assets/05-evaluation-status.png)
+![Task Execution](../assets/05-evaluation-status.png)
 
 ```bash
 k -n demo-app-dev get keptnevaluation
@@ -168,4 +168,4 @@ post-eval-demoapp-heatlh-check-17614   demo-app   v2-4y4hftehfeyu7den           
 
 You should see a new Pull Request in your repository which promotes the deployment to the production environment.
 
-![Promotion PR](assets/05-promotion-pr.png)
+![Promotion PR](../assets/05-promotion-pr.png)

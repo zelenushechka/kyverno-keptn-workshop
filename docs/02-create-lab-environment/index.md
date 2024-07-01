@@ -6,13 +6,13 @@ Go to [heckelmann/kyverno-keptn-workshop](https://github.com/heckelmann/kyverno-
 
 Make sure the forked repository visibility is set to `Public`.
 
-![Fork Repository](assets/02-fork-repository.png)
+![Fork Repository](../assets/02-fork-repository.png)
 
 ## Start GitHub CodeSpace
 
 In your fork, go to "Code" then switch to the "Codespaces" tab and click "Create codespace on main".
 
-![Fork Repository](assets/02-create-codespace.png)
+![Fork Repository](../assets/02-create-codespace.png)
 
 A new window will open with the Codespace. This will take a few minutes to start.
 
@@ -49,11 +49,11 @@ This will spin up a KinD Cluster within your Codespace, install ArgoCD and creat
 
 You can now access ArgoCD by clicking on the exposed port of your GitHub Code Space
 
-![Access ArgoCD](assets/02-access-argo.png)
+![Access ArgoCD](../assets/02-access-argo.png)
 
 After logging in with the `admin` user and the password displayed during the installation, you will see the ArgoCD Web Console.
 
-![Access ArgoCD Web](assets/02-argocd-web-console.png)
+![Access ArgoCD Web](../assets/02-argocd-web-console.png)
 
 ## Create GitHub API Token and K8s Secret
 
@@ -63,7 +63,7 @@ Select access only to your forked repository and set the permission on `Actions`
 
 Note down the generated token.
 
-![Fork Repository](assets/02-create-token.png)
+![Fork Repository](../assets/02-create-token.png)
 
 Switch back to your Codespace and create a Kubernetes secret with the token:
 

@@ -34,20 +34,27 @@ theme:
     code: Roboto Mono
 
 nav:
-  - 'Home': 'index.md'
-  - 'Tutorial Steps':
-      - '1: Overview': '01-workshop-introduction.md'
-      - '2: Setup Lab Environment': '02-create-lab-environment.md'
+  - Home: index.md
+  - Tutorial Steps:
+      - '1: Overview':
+        - 01-workshop-introduction/index.md
+      - '2: Setup Lab Environment':
+        - 02-create-lab-environment/index.md
       - '3: The System Explained':
         - 03-the-system-explained/index.md
         - '3.1: Keptn': 03-the-system-explained/keptn.md
         - '3.2: Kyverno': 03-the-system-explained/kyverno.md
         - '3.3: Chainsaw': 03-the-system-explained/chainsaw.md
-      - '4: Testing The System': 04-test-the-system.md
-      - '4: Pre Deployment Checks': '04-pre-deployment-checks.md'
-      - '5: Chainsaw test': '05-chainsaw-test.md'
-      - '6: Evaluate & Promote Deployments': '06-evaluate-and-promote.md'
-      - '7: Deployment Observability': '07-deployment-observability.md'
+      - '4: Testing The System':
+        - 04-test-the-system/index.md
+      - '5: Pre Deployment Checks':
+        - 05-pre-deployment-checks/index.md
+        - '5.1: Chainsaw test': 05-pre-deployment-checks/chainsaw-test.md
+      - '6: Evaluate & Promote Deployments':
+        - 06-evaluate-and-promote/index.md
+        - '6.1: Chainsaw test': 06-evaluate-and-promote/chainsaw-test.md
+      - '7: Deployment Observability':
+        - 07-deployment-observability/index.md
   - 'Final Exam': 'final-exam.md'
 
 # pip install mkdocs-macros-plugin
