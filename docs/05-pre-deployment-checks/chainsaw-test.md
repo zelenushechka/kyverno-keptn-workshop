@@ -16,7 +16,6 @@ In this exercise, you will create a chainsaw test to verify that a KeptnTask is 
 Create a new file `chainsaw-test.yaml` in the `tests/05-pre-deployment-checks` folder of your repository and add the following content:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/kyverno/chainsaw/main/.schemas/json/test-chainsaw-v1alpha1.json
 apiVersion: chainsaw.kyverno.io/v1alpha1
 kind: Test
 metadata:
@@ -121,7 +120,7 @@ spec:
                   - name: commitID
                     value: $ARGOCD_APP_REVISION
                   - name: serviceVersion
-                    value: v1
+                    value: v2
                   - name: service.nodePort
                     value: '31106'
             destination:
@@ -139,7 +138,7 @@ spec:
             checkType: pre
             context:
               appName: demo-app
-              appVersion: v1
+              appVersion: v2
               objectType: App
               taskType: pre
               workloadName: ""
