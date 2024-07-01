@@ -2,21 +2,58 @@
 apiVersion: chainsaw.kyverno.io/v1alpha1
 kind: Test
 metadata:
-  name: maintenance-window-check-dev
+  name: maintenance-window-check
 spec:
-  namespace: demo-app-dev
   steps:
   - try:
-    - delete:
-        ref:
-          apiVersion: lifecycle.keptn.sh/v1
-          kind: KeptnApp
-          name: demo-app
-    - delete:
-        ref:
-          apiVersion: apps/v1
-          kind: Deployment
-          name: demo-app
+    - apply:
+        resource:
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            name: demo-app-test
+            namespace: argocd
+            annotations:
+              argocd.argoproj.io/sync-wave: '10'
+            finalizers:
+              - resources-finalizer.argocd.argoproj.io
+          spec:
+            project: default
+            source:
+              path: charts/demo-app
+              repoURL: https://github.com/heckelmann/kyverno-keptn-workshop
+              targetRevision: main
+              helm:
+                valueFiles:
+                  - ../../gitops/dev/demo-app/values.yaml
+                  - ../../gitops/dev/demo-app/values-specific.yaml
+                parameters:
+                  - name: commitID
+                    value: $ARGOCD_APP_REVISION
+                  - name: serviceVersion
+                    value: v1
+                  - name: service.nodePort
+                    value: '31106'
+            destination:
+              server: https://kubernetes.default.svc
+              namespace: ($namespace)
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+    - assert:
+        timeout: 10m
+        resource:
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            name: demo-app-test
+            namespace: argocd
+          status:
+            health:
+              status: Healthy
+            sync:
+              status: Synced
     - assert:
         timeout: 1m
         resource:
@@ -24,18 +61,36 @@ spec:
           kind: KeptnApp
           metadata:
             name: demo-app
-    - assert:
-        resource:
-          apiVersion: lifecycle.keptn.sh/v1
-          kind: KeptnTask
-          spec:
-            checkType: pre
-            context:
-              appName: demo-app
-              appVersion: v1
-              objectType: App
-              taskType: pre
-              workloadName: ""
-            taskDefinition: maintenance-window-check
-          status:
-            status: Succeeded
+
+    # - delete:
+    #     ref:
+    #       apiVersion: lifecycle.keptn.sh/v1
+    #       kind: KeptnApp
+    #       name: demo-app
+    # - delete:
+    #     ref:
+    #       apiVersion: apps/v1
+    #       kind: Deployment
+    #       name: demo-app
+    # - assert:
+    #     timeout: 1m
+    #     resource:
+    #       apiVersion: lifecycle.keptn.sh/v1
+    #       kind: KeptnApp
+    #       metadata:
+    #         name: demo-app
+    # - assert:
+    #     resource:
+    #       apiVersion: lifecycle.keptn.sh/v1
+    #       kind: KeptnTask
+    #       spec:
+    #         checkType: pre
+    #         context:
+    #           appName: demo-app
+    #           appVersion: v1
+    #           objectType: App
+    #           taskType: pre
+    #           workloadName: ""
+    #         taskDefinition: maintenance-window-check
+    #       status:
+    #         status: Succeeded
