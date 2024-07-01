@@ -2,7 +2,7 @@
 apiVersion: chainsaw.kyverno.io/v1alpha1
 kind: Test
 metadata:
-  name: maintenance-window-check-dev
+  name: maintenance-window-check
 spec:
   steps:
   - try:
@@ -15,6 +15,8 @@ spec:
             namespace: argocd
             annotations:
               argocd.argoproj.io/sync-wave: '10'
+            finalizers:
+              - resources-finalizer.argocd.argoproj.io
           spec:
             project: default
             source:
@@ -28,8 +30,10 @@ spec:
                 parameters:
                   - name: commitID
                     value: $ARGOCD_APP_REVISION
+                  - name: serviceVersion
+                    value: v1
                   - name: service.nodePort
-                    value: '33333'
+                    value: '31106'
             destination:
               server: https://kubernetes.default.svc
               namespace: ($namespace)
@@ -50,6 +54,13 @@ spec:
               status: Healthy
             sync:
               status: Synced
+    - assert:
+        timeout: 1m
+        resource:
+          apiVersion: lifecycle.keptn.sh/v1
+          kind: KeptnApp
+          metadata:
+            name: demo-app
 
     # - delete:
     #     ref:
