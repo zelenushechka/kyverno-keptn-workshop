@@ -12,11 +12,11 @@ Within this workshop, we will use GitHub Codespaces to run a local Kubernetes Cl
 
 Your Dev environment has multiple tools preconfigured such as:
 
-- KinD (Kubernetes in Docker)
-- K9s (Kubernetes CLI)
+- [KinD](https://kind.sigs.k8s.io/) (Kubernetes in Docker)
+- [K9s](https://k9scli.io/) (Kubernetes CLI)
 - kubectl
 - ArgoCD CLI
-- Kyverno chainsaw
+- [Chainsaw](https://kyverno.github.io/chainsaw/latest/)
 
 Your workshop cluster will include the following pre-configured components:
 

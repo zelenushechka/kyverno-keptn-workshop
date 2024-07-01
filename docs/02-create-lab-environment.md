@@ -8,7 +8,6 @@ Make sure the forked repository visibility is set to `Public`.
 
 ![Fork Repository](assets/02-fork-repository.png)
 
-
 ## Start GitHub CodeSpace
 
 In your fork, go to "Code" then switch to the "Codespaces" tab and click "Create codespace on main".
@@ -44,7 +43,9 @@ YOURPASSWORD
 
 This will spin up a KinD Cluster within your Codespace, install ArgoCD and create the `app-of-apps` application, which will deploy all other components.
 
-*Please note the ArgoCD Admin Password, which will be displayed at the end of the installation.* 
+!!! tip
+
+    Please note the ArgoCD Admin Password, which will be displayed at the end of the installation.
 
 You can now access ArgoCD by clicking on the exposed port of your GitHub Code Space
 

@@ -8,4 +8,4 @@ spec:
   args:
     "workload": "demo-app-prod"
   analysisDefinition:
-    name: demo-app-analysis            
+    name: demo-app-analysis
