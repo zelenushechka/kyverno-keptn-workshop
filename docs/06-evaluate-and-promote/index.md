@@ -12,7 +12,7 @@ See `charts/demo-app/templates/podmonitor.yaml` for the Prometheus PodMonitor co
 
 ## Exercise
 
-### Create a keptnMetricsProvider
+### Create a KeptnMetricsProvider
 
 Create a new file `metrics-provider.yaml` in the `charts/demo-app/templates/keptn` folder of your repository and add the following content:
 

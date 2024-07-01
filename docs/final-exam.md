@@ -30,7 +30,7 @@ Your task is to create three Kyverno Policies to automatically fix the issue.
   - You need to watch the API Group Kind `Analysis/status` for an `UPDATE` operation.
   - Use a precondition to check if the Analysis is completed `request.object.status.state == "Completed"` and the roll back if  `request.object.status.pass != "pass"` be aware that this field does not exist if the Analysis is not completed or failed.
 
-## Tipps and Lessons Learned 
+## Tips and Lessons Learned 
 
 ### Permissions for Kyverno
 
