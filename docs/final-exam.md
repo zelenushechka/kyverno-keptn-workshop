@@ -14,21 +14,52 @@ Your task is to create three Kyverno Policies to automatically fix the issue.
   - You can find the Job in `/excercises/final-exam/load-test-job.yaml`
   - You need to watch the API Group Kind `FeatureFlag` for an `UPDATE` operation.
   - Use label selectors to explicitly watch the flagdefinition for the `demo-app`
+    ```yaml
+    apiVersion: kyverno.io/v1
+    kind: ClusterPolicy
+    metadata:
+      name: feature-flag-change
+      annotations:
+        argocd.argoproj.io/sync-options: Force=true,Replace=true
+    spec:
+      rules:
+        - name: match-feature-flag-change
+          match:
+            any:
+            - resources:
+                kinds:
+                - FeatureFlag
+                operations:
+                - UPDATE
+                selector:
+                  matchLabels:
+                    app: sample-app
+                    type: feature-flag
+          generate:
     ```
-    app: sample-app
-    type: feature-flag
-    ```
+  
 
 2. The second policy should check if the load test job is completed and trigger a KeptnAnalysis.
   - You can find a KeptnAnalysis in `/excercises/final-exam/keptn-analysis.yaml`.
   - You need to watch the API Group Kind `Job/status` for an `UPDATE` operation.
-  - Use a precondition to check if the Job is completed `request.object.status.succeeded`
+  - Use a [precondition](https://kyverno.io/docs/writing-policies/preconditions/) to check if the Job is completed `request.object.status.succeeded`
+
+  ```yaml
+        preconditions:
+        all:
+          - key: "{{ request.object.status.state || `[]` }}"
+            operator: Equals
+            value: "Completed"
+          - key: "{{ request.object.status.pass || `false` }}"
+            operator: NotEquals
+            value: true
+  ```
 
 
 3. The third policy should check the result of the KeptnAnalysis and roll back the flagdefinition to it's previous state. 
   - You can find the Job in `/excercises/final-exam/argo-rollback.yaml`.
   - You need to watch the API Group Kind `Analysis/status` for an `UPDATE` operation.
-  - Use a precondition to check if the Analysis is completed `request.object.status.state == "Completed"` and the roll back if  `request.object.status.pass != "pass"` be aware that this field does not exist if the Analysis is not completed or failed.
+  - Use a [precondition](https://kyverno.io/docs/writing-policies/preconditions/) to check if the Analysis is completed `request.object.status.state == "Completed"` and the roll back if  `request.object.status.pass != "pass"` be aware that this field does not exist if the Analysis is not completed or failed.
 
 ## Tips and Lessons Learned 
 
