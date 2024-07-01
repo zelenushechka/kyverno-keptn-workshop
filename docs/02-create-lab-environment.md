@@ -57,7 +57,7 @@ After logging in with the `admin` user and the password displayed during the ins
 
 ## Create GitHub API Token and K8s Secret
 
-Open the GitHub settings and navigate to `Developer settings` -> `Personal access tokens` -> `Fine-grained tokens` [https://github.com/settings/tokens?type=beta](https://github.com/settings/tokens?type=beta).
+Open the GitHub settings and navigate to `Developer settings` -> `Personal access tokens` -> `Fine-grained tokens` ([https://github.com/settings/tokens?type=beta](https://github.com/settings/tokens?type=beta)).
 
 Select access only to your forked repository and set the permission on `Actions` to `read` and `write` access.
 
