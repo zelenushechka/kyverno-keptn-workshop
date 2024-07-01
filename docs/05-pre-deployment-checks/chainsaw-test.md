@@ -13,28 +13,75 @@ In this exercise, you will create a chainsaw test to verify that a KeptnTask is 
 
 ### Create the chainsaw test
 
-Create a new file `chainsaw-test.yaml` in the `tests/01-maintenance-window-check` folder of your repository and add the following content:
+Create a new file `chainsaw-test.yaml` in the `tests/05-pre-deployment-checks` folder of your repository and add the following content:
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/kyverno/chainsaw/main/.schemas/json/test-chainsaw-v1alpha1.json
 apiVersion: chainsaw.kyverno.io/v1alpha1
 kind: Test
 metadata:
-  name: maintenance-window-check-dev
+  name: maintenance-window-check
 spec:
-  namespace: demo-app-dev
+  bindings:
+  - name: repo
+    value: (env('GITHUB_REPOSITORY'))
   steps:
   - try:
-    - delete:
-        ref:
-          apiVersion: lifecycle.keptn.sh/v1
-          kind: KeptnApp
-          name: demo-app
-    - delete:
-        ref:
-          apiVersion: apps/v1
-          kind: Deployment
-          name: demo-app
+    - apply:
+        resource:
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            name: demo-app-test
+            namespace: argocd
+            annotations:
+              argocd.argoproj.io/sync-wave: '10'
+            finalizers:
+              - resources-finalizer.argocd.argoproj.io
+          spec:
+            project: default
+            source:
+              path: charts/demo-app
+              repoURL: (join('/', ['https://github.com', $repo]))
+              targetRevision: main
+              helm:
+                valuesObject:
+                  repo:
+                    name: ($repo)
+                  keptn:
+                    appContext:
+                      preDeploymentTasks:
+                      - maintenance-window-check
+                valueFiles:
+                  - ../../gitops/dev/demo-app/values.yaml
+                  - ../../gitops/dev/demo-app/values-specific.yaml
+                parameters:
+                  - name: commitID
+                    value: $ARGOCD_APP_REVISION
+                  - name: serviceVersion
+                    value: v1
+                  - name: service.nodePort
+                    value: '31106'
+            destination:
+              server: https://kubernetes.default.svc
+              namespace: ($namespace)
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+    - assert:
+        timeout: 10m
+        resource:
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            name: demo-app-test
+            namespace: argocd
+          status:
+            health:
+              status: Healthy
+            sync:
+              status: Synced
     - assert:
         timeout: 1m
         resource:
@@ -42,6 +89,48 @@ spec:
           kind: KeptnApp
           metadata:
             name: demo-app
+    - apply:
+        resource:
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            name: demo-app-test
+            namespace: argocd
+            annotations:
+              argocd.argoproj.io/sync-wave: '10'
+            finalizers:
+              - resources-finalizer.argocd.argoproj.io
+          spec:
+            project: default
+            source:
+              path: charts/demo-app
+              repoURL: (join('/', ['https://github.com', $repo]))
+              targetRevision: main
+              helm:
+                valuesObject:
+                  repo:
+                    name: ($repo)
+                  keptn:
+                    appContext:
+                      preDeploymentTasks:
+                      - maintenance-window-check
+                valueFiles:
+                  - ../../gitops/dev/demo-app/values.yaml
+                  - ../../gitops/dev/demo-app/values-specific.yaml
+                parameters:
+                  - name: commitID
+                    value: $ARGOCD_APP_REVISION
+                  - name: serviceVersion
+                    value: v1
+                  - name: service.nodePort
+                    value: '31106'
+            destination:
+              server: https://kubernetes.default.svc
+              namespace: ($namespace)
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
     - assert:
         resource:
           apiVersion: lifecycle.keptn.sh/v1
@@ -68,7 +157,7 @@ Chainsaw will verify that a KeptnTask was executed and that the execution was su
 The test above can be run with:
 
 ```bash
-chainsaw test tests/01-maintenance-window-check
+chainsaw test tests/05-pre-deployment-checks
 ```
 
 If the test succeeds you should see an output similar to:
@@ -129,4 +218,4 @@ Done.
 
 ### Summary
 
-In this exercise, you have learned how to use chainsaw to validate that pre-deployment tasks defined in your KeptnAppContext are correctly executed when the demo app is updated.
+In this exercise, you have learned how to use Chainsaw to validate that pre-deployment tasks defined in your KeptnAppContext are correctly executed when the demo app is updated.

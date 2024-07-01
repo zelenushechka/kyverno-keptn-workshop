@@ -2,7 +2,7 @@
 
 While the workshop environment has been completely installed, there's no test to guarantee that a specific change will continue to work.
 
-To test that the system can be installed correctly you will add a chainsaw test to verify that ArgoCD applications sync successfully and that Keptn created the corresponding KeptnApp resources.
+To test that the system can be installed correctly you will add a Chainsaw test to verify that ArgoCD applications sync successfully and that Keptn created the corresponding KeptnApp resources.
 
 Full documentation of Chainsaw can be found [here](https://kyverno.github.io/chainsaw/latest/).
 
@@ -10,7 +10,7 @@ Full documentation of Chainsaw can be found [here](https://kyverno.github.io/cha
 
 In this exercise, you will create a Chainsaw test to verify that both `demo-app-dev` and `demo-app-prod` have been successfully synced in the cluster by ArgoCD.
 
-### Create the chainsaw test
+### Create the Chainsaw test
 
 Create a new file `chainsaw-test.yaml` in the `tests/04-test-the-system` folder of your repository and add the following content:
 
