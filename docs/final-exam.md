@@ -15,6 +15,7 @@ Your task is to create three Kyverno Policies to automatically fix the issue.
   - You need to watch the API Group Kind `FeatureFlag` for an `UPDATE` operation.
   - Use label selectors to explicitly watch the flagdefinition for the `demo-app`
     ```yaml
+    {% raw %}
     apiVersion: kyverno.io/v1
     kind: ClusterPolicy
     metadata:
@@ -36,6 +37,7 @@ Your task is to create three Kyverno Policies to automatically fix the issue.
                     app: sample-app
                     type: feature-flag
           generate:
+        {% endraw %}
     ```
   
 
@@ -45,6 +47,7 @@ Your task is to create three Kyverno Policies to automatically fix the issue.
   - Use a [precondition](https://kyverno.io/docs/writing-policies/preconditions/) to check if the Job is completed `request.object.status.succeeded`
 
   ```yaml
+  {% raw %}
         preconditions:
         all:
           - key: "{{ request.object.status.state || `[]` }}"
@@ -53,6 +56,7 @@ Your task is to create three Kyverno Policies to automatically fix the issue.
           - key: "{{ request.object.status.pass || `false` }}"
             operator: NotEquals
             value: true
+  {% endraw %}
   ```
 
 
