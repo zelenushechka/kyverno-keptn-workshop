@@ -16,8 +16,6 @@ spec:
         repo:
           name: {{ .Values.repo.name }}
           revision: {{ .Values.repo.revision }}
-        service:
-          nodePort: 30103
       valueFiles:
         - ../../gitops/dev/demo-app/values.yaml
         - ../../gitops/dev/demo-app/values-specific.yaml
