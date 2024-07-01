@@ -124,7 +124,7 @@ With the changes above, GitHub will execute the Chainsaw tests for every pull re
 
 ![GitHub logs](action-logs.png)
 
-You can block pull request merges based on the test outcome.
+You can allow (or block) pull request merges based on the test outcome.
 
 ![All checks have passed](passed.png)
 

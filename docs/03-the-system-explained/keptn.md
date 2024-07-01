@@ -147,5 +147,25 @@ spec:
 An [AnalysisDefinition](https://keptn.sh/stable/docs/reference/crd-reference/analysisdefinition/) resource defines the list of Service Level Objectives (SLOs) for an Analysis.
 
 ```yaml
-{% include "assets/AnalysisDefinition.yaml" %}
+apiVersion: metrics.keptn.sh/v1
+kind: AnalysisDefinition
+metadata:
+  name: demo-app-analysis
+  namespace: demo-app-prod
+spec:
+  objectives:
+  - analysisValueTemplateRef:
+      name: request-duration
+    keyObjective: true
+    target:
+      failure:
+        greaterThan:
+          fixedValue: 3
+      warning:
+        greaterThan:
+          fixedValue: 2
+    weight: 1
+  totalScore:
+    passPercentage: 90
+    warningPercentage: 75
 ```
