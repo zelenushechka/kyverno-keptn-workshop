@@ -6,7 +6,7 @@ CLUSTER_NAME            ?= workshop-cluster
 
 create: ## Create a Kind cluster
 	@echo "Creating KinD cluster"
-	@kind create cluster --name $(CLUSTER_NAME) --config cluster/kind.yaml
+	@kind create cluster --name $(CLUSTER_NAME) --config infrastructure/kind/config.yaml
 	@echo "Deploy ArgoCD"
 	@kubectl create namespace argocd
 	@kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
