@@ -28,6 +28,7 @@ theme:
   features:
     - content.code.copy
     - navigation.footer
+    - navigation.indexes
   font: 
     text: Exo 2
     code: Roboto Mono
@@ -37,7 +38,11 @@ nav:
   - 'Tutorial Steps':
       - '1: Overview': '01-workshop-introduction.md'
       - '2: Setup Lab Environment': '02-create-lab-environment.md'
-      - '3: The System Explained': '03-the-system-explained.md'
+      - '3: The System Explained':
+        - 03-the-system-explained/index.md
+        - '3.1: Keptn': 03-the-system-explained/keptn.md
+        - '3.2: Kyverno': 03-the-system-explained/kyverno.md
+        - '3.3: Chainsaw': 03-the-system-explained/chainsaw.md
       - '4: Pre Deployment Checks': '04-pre-deployment-checks.md'
       - '5: Chainsaw test': '05-chainsaw-test.md'
       - '6: Evaluate & Promote Deployments': '06-evaluate-and-promote.md'

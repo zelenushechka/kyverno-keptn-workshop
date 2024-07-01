@@ -16,7 +16,7 @@ Your Dev environment has multiple tools preconfigured such as:
 - [K9s](https://k9scli.io/) (Kubernetes CLI)
 - kubectl
 - ArgoCD CLI
-- [Chainsaw](https://kyverno.github.io/chainsaw/latest/)
+- [Chainsaw](https://kyverno.github.io/chainsaw/latest/) (end-to-end test tool)
 
 Your workshop cluster will include the following pre-configured components:
 
