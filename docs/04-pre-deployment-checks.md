@@ -28,7 +28,7 @@ spec:
   timeout: 5m
   python:
     httpRef: 
-      url: 'https://raw.githubusercontent.com/{{ .Values.repo.name }}/{{ .Values.repo.revision }}/tasks/checkmaintenance.py'
+      url: {% raw %}https://raw.githubusercontent.com/{{ .Values.repo.name }}/{{ .Values.repo.revision }}/tasks/checkmaintenance.py{% endraw %}
 ```
 
 This KeptnTaskDefinition defines a task that retries 3 times with a timeout of 5 minutes. The task is executed by a Python script that is stored in the `tasks` folder of this repository.

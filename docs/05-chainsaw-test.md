@@ -1,11 +1,11 @@
 # Pre-Deployment Checks (chainsaw test)
 
-With pre-deployment checks enabled and the maintenance window check in place, the KeptnTask is supposed to be executed before the deployment is successful.
+With pre-deployment checks enabled and the maintenance window check in place, a KeptnTask is now supposed to execute before the deployment is considered successful.
 
 However, if this automation is not working properly it can put your system at risk.
 To exercise the automation and make sure it behaves as expected you can write and execute a chainsaw test.
 
-A full documentation of KeptnTasks can be found [here](https://kyverno.github.io/chainsaw/latest/).
+Full documentation of chainsaw can be found [here](https://kyverno.github.io/chainsaw/latest/).
 
 ## Exercise
 

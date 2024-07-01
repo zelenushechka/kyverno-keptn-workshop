@@ -4,7 +4,11 @@
 
 ## The Kyverno & Keptn Workshop
 
-In this workshop, you will learn how to build and deploy applications with security, observability, and reliability in mind. We will use Chainsaw to ensure your application behaves correctly, and Kyverno to validate and enforce security policies in CI/CD Pipelines and Runtime. Furthermore, you will learn how to make your deployment observable with Keptn and how to automate the promotion of your application through different stages with a GitOps approach.
+In this workshop, you will learn how to build and deploy applications with security, observability, and reliability in mind.
+
+We will use [Chainsaw](https://kyverno.github.io/chainsaw/latest/) to ensure your application behaves correctly, and [Kyverno](https://kyverno.io/) to validate and enforce security policies in CI/CD Pipelines and Runtime.
+
+Furthermore, you will learn how to make your deployment observable with [Keptn](https://keptn.sh/stable/) and how to automate the promotion of your application through different stages with a GitOps approach.
 
 
 ## Who we are

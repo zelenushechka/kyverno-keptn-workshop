@@ -64,7 +64,7 @@ spec:
   timeout: 5m
   python:
     httpRef: 
-      url: 'https://raw.githubusercontent.com/{{ .Values.repo.name }}/{{ .Values.repo.revision }}/tasks/checkmaintenance.py'
+      url: {% raw %}https://raw.githubusercontent.com/{{ .Values.repo.name }}/{{ .Values.repo.revision }}/tasks/checkmaintenance.py{% endraw %}
 ```
 
 To assign this KeptnTask to a KeptnApp, you need to add it to the `KeptnAppContext`, as shown in the example above.
